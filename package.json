@@ -1,0 +1,44 @@
+{
+  "name": "markdoc",
+  "version": "1.0.0",
+  "description": "markdown to doc",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --config webpack.config.js",
+    "dev": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "markdown",
+    "reactdoc"
+  ],
+  "author": "zhangpeng",
+  "license": "ISC",
+  "dependencies": {
+    "antd": "^2.9.1",
+    "highlight": "^0.2.4",
+    "highlight.js": "^9.11.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-route": "^1.0.3",
+    "walk": "^2.3.9",
+    "webpack": "^2.4.1",
+    "yaml-front-matter": "^3.4.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-import": "^1.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "css-loader": "^0.28.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3",
+    "npm-install-webpack-plugin": "^4.0.4",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "style-loader": "^0.16.1",
+    "webpack-dev-server": "^2.4.2"
+  }
+}
