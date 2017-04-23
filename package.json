@@ -8,9 +8,13 @@
     "dev": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": "git@github.com:kokokele/cherry.git",
   "keywords": [
     "markdown",
-    "reactdoc"
+    "reactdoc",
+    "md",
+    "marked",
+    "doc"
   ],
   "author": "zhangpeng",
   "license": "ISC",
