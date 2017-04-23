@@ -56,10 +56,26 @@ renderer.code = (code, lang, escaped) => {
         </div>`;
 }
 
+renderer.table = function (header, body) {
+    return '<table class="table table-striped">'+header+body+'</table>'
+}
+
+renderer.list = function(body, ordered) {
+  var type = ordered ? 'ol' : 'ul';
+  var styles = ordered ? 'upper-roman' : 'disc';
+  return '<' + type + ' style="padding-left:40px; list-style-type:'+ styles + ';" >\n' + body + '</' + type + '>\n';
+}
+
 function process(source) {
     source = marked(source, {
         renderer: renderer,
-        gfm: true   
+        gfm: true,
+        tables: true,
+        breaks: true,
+        pedantic: false,
+        sanitize: true,
+        smartLists: true,
+        smartypants: false   
      });
 
     const res = JSON.stringify(source);

@@ -6,7 +6,6 @@ import RM from 'react-dom';
 
 import Comp, {md, id} from './test.md';
 
-console.log('md:', md);
 
 class App extends React.Component {
   constructor(props) {
