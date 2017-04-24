@@ -1,5 +1,5 @@
 {
-  "name": "markdoc",
+  "name": "cherry",
   "version": "1.0.0",
   "description": "markdown to doc",
   "main": "index.js",
@@ -16,10 +16,14 @@
     "marked",
     "doc"
   ],
+  "bin": {
+    "cherry": "bin/cherry"
+  },
   "author": "zhangpeng",
   "license": "ISC",
   "dependencies": {
     "antd": "^2.9.1",
+    "commander": "^2.9.0",
     "highlight": "^0.2.4",
     "highlight.js": "^9.11.0",
     "react": "^15.5.4",
@@ -40,7 +44,6 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
-    "npm-install-webpack-plugin": "^4.0.4",
     "react-hot-loader": "^3.0.0-beta.6",
     "style-loader": "^0.16.1",
     "webpack-dev-server": "^2.4.2"

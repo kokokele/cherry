@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+
+const wp = require('../src/wp');
+
+
+program
+    .version(require('../package').version );
+
+program
+    .usage('<command>')
+    .option('-r, --root <dir>', 'site root dir, default ./src')
+    .option('-e, --ext <name>', 'md ext, default .md')
+
+
+program
+    .command('start')
+    .description('start site')
+    .alias('st')
+    .action((p) => {
+        // const a = program.peppers;
+        const root = p.root || './src';
+        const ext = p.ext || '.md';
+
+        wp({root, ext});
+    })
+
+
+program.parse(process.argv)
+
+if(!program.args.length){
+    program.help()
+}

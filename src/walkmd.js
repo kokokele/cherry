@@ -1,48 +1,44 @@
 const fs = require('fs');
 const path = require('path');
 const walk = require('walk');
-const config  = require('./config');
-// const md = require('./lib/marked');
 const yamlFront = require('yaml-front-matter')
 
 
-const test = require('./test.md');
-
-console.log(test);
-
-
-const mdData = {};
+module.exports = function walkMD(config, callback) {
+    const mdData = {};
 
 
-const walker = walk.walk(config.root);
-walker.on('file', function (root, fileStats, next) {
-    const name = fileStats.name;
-    const ext = path.extname(name);
-    const basename = path.basename(name, config.ext);
+    const walker = walk.walk(config.root);
+    walker.on('file', function (root, fileStats, next) {
+        const name = fileStats.name;
+        const ext = path.extname(name);
+        const basename = path.basename(name, config.ext);
 
-    const file = path.resolve('', root + '/' + name);
-    // console.log(file);
-    if (ext === config.ext) {
-        const input = fs.readFileSync(file, 'utf-8');
-        const results = yamlFront.loadFront(input, 'content');
-        // console.log(results);
+        const file = path.resolve('', root + '/' + name);
+        // console.log(file);
+        if (ext === config.ext) {
+            const input = fs.readFileSync(file, 'utf-8');
+            const yaml = yamlFront.loadFront(input, 'content');
+            // console.log(yaml);
+            const title = yaml.title;
+            const rank  = yaml.rank;
 
-        mdData[basename] = results;
+            if (!mdData[title]) mdData[title] = {};
+            if (!mdData[title].files) mdData[title].files = [];
+            mdData[title].files[rank] = file;
+        }
 
-        // const res = md(results.content);
-        // console.log(res);
-    }
-
-    next();
-});
+        next();
+    });
 
 
-walker.on('end', () => {
+    walker.on('end', () => {
+        console.log(mdData);
+        fs.writeFileSync(__dirname + '/__md__.json', JSON.stringify(mdData));
+        if (callback) callback(mdData);
+    });
 
-    // console.log('end');
-    console.log(mdData);
-});
-
-walker.on('error', (e) => {
-    console.log(e);
-})
+    walker.on('error', (e) => {
+        console.log(e);
+    });
+}

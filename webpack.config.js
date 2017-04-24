@@ -3,10 +3,9 @@ const webpack = require('webpack');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-
 const config = {
     entry: {
-        index: "./src/index.js"
+        index: path.resolve(__dirname, "./src/web/index.js")
     },
     output: {
         path: path.resolve(__dirname, "site"),
@@ -23,7 +22,7 @@ const config = {
             {
                 test: /\.jsx?$/,
                 include: [
-                    path.resolve(__dirname, "src")
+                    path.resolve(__dirname, "src/web")
                 ],
                 use: ['babel-loader']
             },

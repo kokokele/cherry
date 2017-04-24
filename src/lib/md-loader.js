@@ -38,6 +38,8 @@ function unescape(html) {
 }
 
 renderer.code = (code, lang, escaped) => {
+
+
     res = code;
     // console.log(babel.transform(code, {
     //     plugins: ["transform-react-jsx"]
@@ -87,7 +89,7 @@ module.exports = function(source, map){
     this.cacheable && this.cacheable();
     //对source进行解析
     var md = process(source);
-    res += `\n export const md=${md}; \n export const id="${id}"`
+    res += `\n export const md=${md}; \n export const id="${id}";`
     console.log('----------------')
     console.log(res);
     console.log('--------------')

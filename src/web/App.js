@@ -4,7 +4,9 @@ import styles from './App.css';
 import {Button, DatePicker } from 'antd';
 import RM from 'react-dom';
 
-import Comp, {md, id} from './test.md';
+import {Comp, md, id} from './test.md';
+
+const MD = require('./test.md');
 
 
 class App extends React.Component {
@@ -13,7 +15,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    RM.render(<Comp />, document.getElementById(id));
+    console.log('comp:', MD);
+    RM.render(<MD.Comp />, document.getElementById(id));
   }
 
   render() {

@@ -1,4 +1,4 @@
 module.exports = {
-    root: './text',
+    root: './src',
     ext: '.md'
 }
