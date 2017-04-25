@@ -1,24 +1,14 @@
 import React from 'react';
 import styles from './App.css';
 // import 'antd/dist/antd.css';
-import {Button, DatePicker } from 'antd';
 import RM from 'react-dom';
 
-import {Comp, md, id} from './test.md';
-
-import JSON from './__md__.json';
-
-const path = require('path');
-
-
-const mid = './test.md';
-
-const MD = require(mid + '');
-
-
-
+import Render from './render';
+// import {Comp, md, id} from './test.md';
+// const mid = './test.md';
+// const MD = require(mid + '');
 // const MD2 = require(p.substr());
-const MD2 = require('../md')
+// const MD2 = require('../md')
 
 
 class App extends React.Component {
@@ -27,20 +17,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('comp:', JSON);
-    RM.render(<MD.Comp />, document.getElementById(id));
+  }
+
+  handleClicked(page) {
+    this.refs.render.setPage(page);
   }
 
   render() {
     return (
        <div className={styles.app}>
-         <div
-              dangerouslySetInnerHTML={{ __html: decodeURIComponent(MD2[0].md) }}
-            />
-       
-        <div
-              dangerouslySetInnerHTML={{ __html: decodeURIComponent(MD.md) }}
-            />
+         <Render ref='render'/>
+         <button onClick={this.handleClicked.bind(this, 'A')}>测试A</button>
+          <button onClick={this.handleClicked.bind(this, 'B')}>测试B</button>
+
        </div>
     )
   }

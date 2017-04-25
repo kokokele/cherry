@@ -4,6 +4,8 @@ const walk = require('walk');
 const yamlFront = require('yaml-front-matter');
 const sh = require('child_process').execSync;
 
+const dist = __dirname + '/tmp';
+
 
 function parseData(arr, page, rank, file) {
     if (!arr.length) {
@@ -26,7 +28,6 @@ function parseData(arr, page, rank, file) {
 }
 
 function writeFiles(data) {
-    const dist = __dirname + '/tmp';
 
     if (fs.existsSync(dist)) sh(`rm -rf ${dist}`);
     fs.mkdirSync(dist);
@@ -82,7 +83,7 @@ module.exports = function walkMD(config, callback) {
     walker.on('end', () => {
         console.log(mdData);
         writeFiles(mdData);
-        // fs.writeFileSync(__dirname + '/web/__md__.json', JSON.stringify(mdData));
+        fs.writeFileSync(dist + '/__md__.json', JSON.stringify(mdData));
         if (callback) callback(mdData);
     });
 
