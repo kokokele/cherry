@@ -3,18 +3,13 @@ const babel = require('babel-core');
 const renderer = new marked.Renderer();
 const yamlFront = require('yaml-front-matter')
 
+const highlightjs = require('highlight.js');
 
-let res = '';
 
+let res;
 const id = 'comp' + Math.random();
 
 const oldCode = renderer.code;
-
-// marked.setOptions({
-//   highlight: function (code) {
-//     return require('highlight.js').highlightAuto(code).value;
-//   }
-// });
 
 function escape(html, encode) {
   return html
@@ -39,25 +34,14 @@ function unescape(html) {
   });
 }
 
-renderer.code = (code, lang, escaped) => {
-
-
+renderer.code = (code, language, escaped) => {
     res = code;
-    // console.log(babel.transform(code, {
-    //     plugins: ["transform-react-jsx"]
-    // }));
-    // const comp = babel.transform(code, {
-    //     plugins: ["transform-react-jsx"]
-    // });
 
-    // eval(comp);
-    
-
-    return `
-        <div>
-            <div id=${id}></div>
-            <pre><code>${escape(code)}</code></pre>
-        </div>`;
+    const validLang = !!(language && highlightjs.getLanguage(language));
+    // Highlight only if the language is valid.
+    const highlighted = validLang ? highlightjs.highlight(language, code).value : code;
+    // Render the highlighted code with `hljs` class.
+    return `<div> <div id=${id}></div><pre><code class="hljs ${language}">${highlighted}</code></pre></div>`;
 }
 
 renderer.table = function (header, body) {
@@ -65,9 +49,9 @@ renderer.table = function (header, body) {
 }
 
 renderer.list = function(body, ordered) {
-  var type = ordered ? 'ol' : 'ul';
-  var styles = ordered ? 'upper-roman' : 'disc';
-  return '<' + type + ' style="padding-left:40px; list-style-type:'+ styles + ';" >\n' + body + '</' + type + '>\n';
+    var type = ordered ? 'ol' : 'ul';
+    var styles = ordered ? 'upper-roman' : 'disc';
+    return '<' + type + ' style="padding-left:40px; list-style-type:'+ styles + ';" >\n' + body + '</' + type + '>\n';
 }
 
 function process(source) {
@@ -79,7 +63,7 @@ function process(source) {
         pedantic: false,
         sanitize: true,
         smartLists: true,
-        smartypants: false   
+        smartypants: false
      });
 
     const res = JSON.stringify(source);
@@ -90,6 +74,7 @@ function process(source) {
 module.exports = function(source, map){
     this.cacheable && this.cacheable();
 
+    res = '';
     const yaml = yamlFront.loadFront(source, 'content');
     //对source进行解析
     var md = process(yaml.content);
