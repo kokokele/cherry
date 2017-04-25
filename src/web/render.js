@@ -35,10 +35,6 @@ export default class Render extends React.Component {
             }
         })
 
-        
-
-        
-
     }
 
     $parseMD(page) {
