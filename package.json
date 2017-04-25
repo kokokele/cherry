@@ -26,6 +26,7 @@
     "commander": "^2.9.0",
     "highlight": "^0.2.4",
     "highlight.js": "^9.11.0",
+    "pubsub-js": "^1.5.6",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-route": "^1.0.3",
