@@ -9,6 +9,9 @@ import Render from './render';
 
 
 export default class ContentView extends React.Component {
+
+    token
+
     constructor(props) {
         super(props);
 
@@ -16,7 +19,11 @@ export default class ContentView extends React.Component {
             this.refs.render.setPage(data);
         };
 
-        var token = PubSub.subscribe('SET_PAGE', mySubscriber );
+        this.token = PubSub.subscribe('SET_PAGE', mySubscriber );
+    }
+
+    componentWillUnmount() {
+        PubSub.unsubscribe(this.token);
     }
 
     render() {

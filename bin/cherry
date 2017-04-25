@@ -23,7 +23,9 @@ program
         const root = p.root || './src';
         const ext = p.ext || '.md';
 
-        wp({root, ext});
+        const config  = require(process.cwd() + '/cherry.config.js');
+
+        wp(config);
     })
 
 

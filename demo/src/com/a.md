@@ -4,7 +4,7 @@ page: A
 rank: 0
 ---
 
-## API
+## APIdfddssddd
 
 | 成员        | 说明           | 类型               | 默认值       |
 |-------------|----------------|--------------------|--------------|
@@ -20,13 +20,10 @@ import {Button, DatePicker} from 'antd';
 import React from 'react';
 import ReactDom from 'react-dom';
 
-export const Comp = (props) => {
+export default (props) => {
     return (
         <div>
             <DatePicker />
-            <Button type="primary">wo shi mwwd</Button>
-            <Button type="primary">wo shi md</Button>
-            <Button type="primary">wo shi md</Button><Button type="primary">wo shi md</Button><Button type="primary">wo shi md</Button>
         </div>
     )
 }

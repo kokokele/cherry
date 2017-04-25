@@ -25,9 +25,19 @@ export default class Render extends React.Component {
     componentDidUpdate() {
 
         const {page} = this.state;
-        const MD = page[0].Comp;
+        const Comp = page[0].default;
 
-        RM.render(<MD />, document.getElementById(page[0].id));
+        page.forEach(p => {
+            const Comp = p.default;
+            if (Comp) {
+                console.log(p.id)
+                RM.render(<Comp />, document.getElementById(p.id));
+            }
+        })
+
+        
+
+        
 
     }
 

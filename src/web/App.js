@@ -32,6 +32,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('DB:', DB)
     return (
       <Layout>
         <HeaderView />
@@ -40,12 +41,7 @@ class App extends React.Component {
               <SiderView db={DB}/>
             </Sider>
             <Layout style={{ padding: '0 24px 24px' }}>
-              <Breadcrumb style={{ margin: '12px 0' }}>
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
-                <Breadcrumb.Item>List</Breadcrumb.Item>
-                <Breadcrumb.Item>App</Breadcrumb.Item>
                 <ContentView />
-              </Breadcrumb>
              </Layout>
         </Layout>
 

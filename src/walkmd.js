@@ -83,7 +83,13 @@ module.exports = function walkMD(config, callback) {
     walker.on('end', () => {
         console.log(mdData);
         writeFiles(mdData);
-        fs.writeFileSync(dist + '/__md__.json', JSON.stringify(mdData));
+
+        //将config 写入 文件
+        const data = {
+            md: mdData,
+            config: config
+        }
+        fs.writeFileSync(dist + '/__md__.json', JSON.stringify(data));
         if (callback) callback(mdData);
     });
 

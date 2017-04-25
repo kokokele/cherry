@@ -7,7 +7,7 @@ const highlightjs = require('highlight.js');
 
 
 let res;
-const id = 'comp' + Math.random();
+let id;
 
 const oldCode = renderer.code;
 
@@ -75,6 +75,7 @@ module.exports = function(source, map){
     this.cacheable && this.cacheable();
 
     res = '';
+    id = 'comp' + Math.random();
     const yaml = yamlFront.loadFront(source, 'content');
     //对source进行解析
     var md = process(yaml.content);

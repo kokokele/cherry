@@ -5,7 +5,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
     entry: {
-        index: path.resolve(__dirname, "./src/web/index.js")
+        index: [
+            'react-hot-loader/patch',
+            'webpack-hot-middleware/client?noInfo=false',
+            path.resolve(__dirname, "./src/web/index.js")
+        ] 
     },
     output: {
         path: path.resolve(__dirname, "site"),

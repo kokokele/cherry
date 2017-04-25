@@ -17,7 +17,8 @@ module.exports = config => {
         // server.listen(wpconfig.devServer.port, "localhost", ()=> {
         //     console.log('====start-dev-server====');
         // });
+        require('./server');
 
-        sh(`${node_modules}/.bin/webpack-dev-server --config ${wpconfigPath}`);
+        // sh(`${node_modules}/.bin/webpack-dev-server --config ${wpconfigPath}`);
     });
 }

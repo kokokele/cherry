@@ -15,19 +15,38 @@ export default class SiderView extends React.Component {
 
 
     $renderItem(db) {
-        let res = [];
-        for(var k in db) {
-            const list = db[k];
+
+        const{md, config} = db;
+
+        const res = [];
+
+        const category = config.category.slice();
+        
+        category.forEach((cg, i) => {
+            const list = md[cg];
             const items = list.map((item, i) => {
                 return <Menu.Item key={item.page}>{item.page}</Menu.Item>
             });
+
             res.push((
-                <SubMenu key={k} title={k}>
-                    {items}
-                </SubMenu>
-            ))
-        }
+                    <SubMenu key={cg + '-key'} title={cg}>
+                        {items}
+                    </SubMenu>
+                ));
+        });
         return res;
+    }
+
+    componentDidMount() {
+
+        const{md, config} =this.props.db;
+        const cg = config.category[0];
+
+            console.log(config);
+
+
+
+            if(cg) PubSub.publish('SET_PAGE', md[cg][0].page);
     }
 
     handleMenuClick({item, key, keyPath}) {
@@ -40,13 +59,17 @@ export default class SiderView extends React.Component {
     render() {
 
         const menuItems = this.$renderItem(this.props.db);
-        
+        const{md, config} =this.props.db;
+
+        const defaultKeys = config.category.map(item => {
+            return item + '-key';
+        })
 
         return (
                 <Menu
                     mode="inline"
                     defaultSelectedKeys={['0']}
-                    defaultOpenKeys={['Comp']}
+                    defaultOpenKeys={defaultKeys}
                     style={{ height: '100%' }}
                     onClick={this.handleMenuClick.bind(this)}
                 >
