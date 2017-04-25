@@ -1,6 +1,8 @@
 const marked = require('./marked');
 const babel = require('babel-core');
 const renderer = new marked.Renderer();
+const yamlFront = require('yaml-front-matter')
+
 
 let res = '';
 
@@ -87,8 +89,10 @@ function process(source) {
 
 module.exports = function(source, map){
     this.cacheable && this.cacheable();
+
+    const yaml = yamlFront.loadFront(source, 'content');
     //对source进行解析
-    var md = process(source);
+    var md = process(yaml.content);
     res += `\n export const md=${md}; \n export const id="${id}";`
     console.log('----------------')
     console.log(res);

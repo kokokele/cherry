@@ -6,7 +6,19 @@ import RM from 'react-dom';
 
 import {Comp, md, id} from './test.md';
 
-const MD = require('./test.md');
+import JSON from './__md__.json';
+
+const path = require('path');
+
+
+const mid = './test.md';
+
+const MD = require(mid + '');
+
+
+
+// const MD2 = require(p.substr());
+const MD2 = require('../md')
 
 
 class App extends React.Component {
@@ -15,15 +27,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('comp:', MD);
+    console.log('comp:', JSON);
     RM.render(<MD.Comp />, document.getElementById(id));
   }
 
   render() {
     return (
        <div className={styles.app}>
+         <div
+              dangerouslySetInnerHTML={{ __html: decodeURIComponent(MD2[0].md) }}
+            />
+       
         <div
-              dangerouslySetInnerHTML={{ __html: decodeURIComponent(md) }}
+              dangerouslySetInnerHTML={{ __html: decodeURIComponent(MD.md) }}
             />
        </div>
     )

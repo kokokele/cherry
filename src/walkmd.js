@@ -1,12 +1,56 @@
 const fs = require('fs');
 const path = require('path');
 const walk = require('walk');
-const yamlFront = require('yaml-front-matter')
+const yamlFront = require('yaml-front-matter');
+const sh = require('child_process').execSync;
+
+
+function parseData(arr, page, rank, file) {
+    if (!arr.length) {
+        const files = [];
+        files[rank] = file;
+        arr.push({
+            'page': page,
+            'files': files
+        })
+        return;
+    }
+
+    arr.every(item => {
+        if (item.page == page) {
+           item.files[rank] = file;
+           return false;
+        }
+        return true;
+    });
+}
+
+function writeFiles(data) {
+    const dist = __dirname + '/tmp';
+
+    if (fs.existsSync(dist)) sh(`rm -rf ${dist}`);
+    fs.mkdirSync(dist);
+
+    for(var k in data) {
+        const category = data[k];
+        category.forEach(item => {
+            let outFile = '';
+            item.files.forEach(f => {
+                outFile += `require('${f}'),\n`
+            })
+
+            let out = `module.exports = [\n${outFile}]`
+            
+            fs.writeFileSync(dist + `/__${item.page}.js`, out);
+        });
+    }
+
+    
+}
 
 
 module.exports = function walkMD(config, callback) {
     const mdData = {};
-
 
     const walker = walk.walk(config.root);
     walker.on('file', function (root, fileStats, next) {
@@ -20,12 +64,15 @@ module.exports = function walkMD(config, callback) {
             const input = fs.readFileSync(file, 'utf-8');
             const yaml = yamlFront.loadFront(input, 'content');
             // console.log(yaml);
-            const title = yaml.title;
+            const page = yaml.page;
             const rank  = yaml.rank;
+            const category = yaml.category;
 
-            if (!mdData[title]) mdData[title] = {};
-            if (!mdData[title].files) mdData[title].files = [];
-            mdData[title].files[rank] = file;
+            if (!mdData[category]) mdData[category] = [];
+            parseData(mdData[category], page, rank, file);
+            // if (!mdData[title]) mdData[title] = {};
+            // if (!mdData[title].files) mdData[title].files = [];
+            // mdData[title].files[rank] = file;
         }
 
         next();
@@ -34,7 +81,8 @@ module.exports = function walkMD(config, callback) {
 
     walker.on('end', () => {
         console.log(mdData);
-        fs.writeFileSync(__dirname + '/__md__.json', JSON.stringify(mdData));
+        writeFiles(mdData);
+        // fs.writeFileSync(__dirname + '/web/__md__.json', JSON.stringify(mdData));
         if (callback) callback(mdData);
     });
 
