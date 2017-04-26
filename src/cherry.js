@@ -23,6 +23,8 @@ module.exports = config => {
         // server.listen(wpconfig.devServer.port, "localhost", ()=> {
         //     console.log('====start-dev-server====');
         // });
+
+        const db = require("./tmp/__md__");
         
         server(config);
 

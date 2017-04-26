@@ -67,7 +67,10 @@ module.exports = function walkMD(config, callback) {
             // console.log(yaml);
             const page = yaml.page;
             const rank  = yaml.rank;
-            const category = yaml.category;
+            let category = yaml.category;
+
+            if (!category) category = 'default';
+            
 
             if (!mdData[category]) mdData[category] = [];
             parseData(mdData[category], page, rank, file);

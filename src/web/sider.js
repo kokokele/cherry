@@ -7,6 +7,8 @@ import {
   Redirect,
   Link
 } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory'
+
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -25,11 +27,10 @@ export default class SiderView extends React.Component {
 
         const category = config.category.slice();
 
-        category.forEach((cg, i) => {
-            const list = md[cg];
+        
+        const renderMenuItem = (list, cg) => {
             const items = list.map((item, i) => {
                 const to = `/page/${item.page}`;
-                console.log("to::::", to)
                 return(
                     <Menu.Item key={item.page}>
                         <Link to={to}>
@@ -39,12 +40,25 @@ export default class SiderView extends React.Component {
                 )
             });
 
+            return items;
+        };
+
+        // 如果md 文件没有设置 category 直接渲染 menuItem；
+        if (md.default && md.default.length) {
+            res.push(renderMenuItem(md.default));
+        }
+
+        category.forEach((cg, i) => {
+            const list = md[cg];
+            const items = renderMenuItem(list, cg);
+
             res.push((
                     <SubMenu key={cg + '-key'} title={cg}>
                         {items}
                     </SubMenu>
                 ));
         });
+
         return res;
     }
 
@@ -62,9 +76,10 @@ export default class SiderView extends React.Component {
         const defaultKeys = config.category.map(item => {
             return item + '-key';
         })
-        
-        // <Redirect to={`/page/${md[cg][0].page}`}/>
 
+        const history = createHistory()
+        const location = history.location;
+              
         return (
             <Menu
                 mode="inline"
@@ -73,8 +88,7 @@ export default class SiderView extends React.Component {
                 style={{ height: '100%' }}
             >
                 {menuItems}
-
-            
+                {(location.pathname === '/' && location.hash === '#/' ) && (<Redirect to={`/page/${md[cg][0].page}`}/>)}
             </Menu>
         )
     }

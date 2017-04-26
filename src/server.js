@@ -28,7 +28,7 @@ module.exports = (cherryConfig) => {
     //add middleware
     if (sc.middleware && sc.middleware.length) {
         sc.middleware.forEach(item => {
-            app.use(item);
+            // app.use(item);
         });
     }
     
