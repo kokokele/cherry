@@ -3,6 +3,12 @@ import styles from './App.css';
 // import 'antd/dist/antd.css';
 import RM from 'react-dom';
 import Render from './render';
+import {
+  BrowserRouter as Router,
+  Route,
+  HashRouter,
+  Link
+} from 'react-router-dom';
 // import {Comp, md, id} from './test.md';
 // const mid = './test.md';
 // const MD = require(mid + '');
@@ -32,20 +38,21 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('DB:', DB)
+    // console.log('DB:', DB)
     return (
-      <Layout>
-        <HeaderView />
+      <HashRouter>
         <Layout>
-            <Sider width={200} style={{ background: '#fff' }}>
-              <SiderView db={DB}/>
-            </Sider>
-            <Layout style={{ padding: '0 24px 24px' }}>
-                <ContentView />
-             </Layout>
+          <HeaderView />
+          <Layout>
+              <Sider width={200} style={{ background: '#fff' }}>
+                <SiderView db={DB}/>
+              </Sider>
+              <Layout style={{ padding: '0 24px 24px' }}>
+                  <Route path="/page/:pageName" component={ContentView}/>
+              </Layout>
+          </Layout>
         </Layout>
-
-      </Layout>
+      </HashRouter>
     )
   }
 }

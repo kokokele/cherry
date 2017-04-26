@@ -1,18 +1,20 @@
 import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
+import {
+  BrowserRouter as Router,
+  Route,
+  HashRouter,
+  Link
+} from 'react-router-dom';
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
-
-import PubSub from 'pubsub-js';
-
 
 export default class SiderView extends React.Component {
 
     constructor(props) {
         super(props);
     }
-
 
     $renderItem(db) {
 
@@ -25,7 +27,13 @@ export default class SiderView extends React.Component {
         category.forEach((cg, i) => {
             const list = md[cg];
             const items = list.map((item, i) => {
-                return <Menu.Item key={item.page}>{item.page}</Menu.Item>
+                return(
+                    <Menu.Item key={item.page}>
+                        <Link to={item.page}>
+                            {item.page}
+                        </Link>
+                    </Menu.Item>
+                )
             });
 
             res.push((
@@ -38,26 +46,12 @@ export default class SiderView extends React.Component {
     }
 
     componentDidMount() {
-
-        const{md, config} =this.props.db;
-        const cg = config.category[0];
-
-            console.log(config);
-
-
-
-            if(cg) PubSub.publish('SET_PAGE', md[cg][0].page);
+        // const{md, config} =this.props.db;
+        // const cg = config.category[0];
+        // if(cg) PubSub.publish('SET_PAGE', md[cg][0].page);
     }
 
-    handleMenuClick({item, key, keyPath}) {
-        console.log(item, key);
-
-        PubSub.publish('SET_PAGE', key);
-
-    } 
-
     render() {
-
         const menuItems = this.$renderItem(this.props.db);
         const{md, config} =this.props.db;
 
@@ -66,17 +60,15 @@ export default class SiderView extends React.Component {
         })
 
         return (
-                <Menu
-                    mode="inline"
-                    defaultSelectedKeys={['0']}
-                    defaultOpenKeys={defaultKeys}
-                    style={{ height: '100%' }}
-                    onClick={this.handleMenuClick.bind(this)}
-                >
-                    {menuItems}
-
-                
-                </Menu>
+            <Menu
+                mode="inline"
+                defaultSelectedKeys={['0']}
+                defaultOpenKeys={defaultKeys}
+                style={{ height: '100%' }}
+            >
+                {menuItems}
+            
+            </Menu>
         )
     }
 }

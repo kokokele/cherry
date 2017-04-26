@@ -10,26 +10,19 @@ import Render from './render';
 
 export default class ContentView extends React.Component {
 
-    token
+    token;
 
     constructor(props) {
         super(props);
-
-        var mySubscriber = ( msg, data ) => {
-            this.refs.render.setPage(data);
-        };
-
-        this.token = PubSub.subscribe('SET_PAGE', mySubscriber );
     }
-
-    componentWillUnmount() {
-        PubSub.unsubscribe(this.token);
-    }
-
+    
     render() {
+        console.log('================')
+        console.log(this.props.match);
+        const {match} = this.props;
         return (
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-                <Render ref='render'/>
+                <Render ref='render' pageName={match.params.pageName}/>
             </Content>
         )
     }
