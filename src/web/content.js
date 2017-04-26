@@ -2,11 +2,8 @@ import React from 'react';
 import PubSub from 'pubsub-js';
 
 import { Layout } from 'antd';
-
 const {Content} = Layout;
-
 import Render from './render';
-
 
 export default class ContentView extends React.Component {
 
@@ -15,7 +12,7 @@ export default class ContentView extends React.Component {
     constructor(props) {
         super(props);
     }
-    
+
     render() {
         console.log('================')
         console.log(this.props.match);

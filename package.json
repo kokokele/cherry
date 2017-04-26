@@ -22,7 +22,6 @@
   "author": "zhangpeng",
   "license": "ISC",
   "dependencies": {
-    "@nfe/mock-middleware": "^1.0.7",
     "antd": "^2.9.1",
     "babel-cli": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",

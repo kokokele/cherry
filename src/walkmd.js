@@ -1,3 +1,7 @@
+/**
+ * @file 遍历所有md文件，生成data文件。
+ * @author zhangpeng53
+ */
 const fs = require('fs');
 const path = require('path');
 const walk = require('walk');
@@ -5,7 +9,6 @@ const yamlFront = require('yaml-front-matter');
 const sh = require('child_process').execSync;
 
 const dist = __dirname + '/tmp';
-
 
 function parseData(arr, page, rank, file) {
     if (!arr.length) {
@@ -45,10 +48,7 @@ function writeFiles(data) {
             fs.writeFileSync(dist + `/__${item.page}.js`, out);
         });
     }
-
-    
 }
-
 
 module.exports = function walkMD(config, callback) {
     const mdData = {};
@@ -78,7 +78,6 @@ module.exports = function walkMD(config, callback) {
 
         next();
     });
-
 
     walker.on('end', () => {
         console.log(mdData);

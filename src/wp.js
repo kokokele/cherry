@@ -1,3 +1,7 @@
+/**
+ * @file start commander, entry file
+ * @author zhangpeng53
+ */
 const wpconfig = require('../webpack.config');
 
 const webpack = require('webpack');

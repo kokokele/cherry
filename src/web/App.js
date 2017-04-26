@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './App.css';
-// import 'antd/dist/antd.css';
 import RM from 'react-dom';
 import Render from './render';
 import {
@@ -9,21 +8,15 @@ import {
   HashRouter,
   Link
 } from 'react-router-dom';
-// import {Comp, md, id} from './test.md';
-// const mid = './test.md';
-// const MD = require(mid + '');
-// const MD2 = require(p.substr());
-// const MD2 = require('../md')
+
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Sider } = Layout;
-
 
 import HeaderView from './header';
 import SiderView from './sider';
 import ContentView from './content';
 
 import DB from '../tmp/__md__.json';
-
 
 class App extends React.Component {
   constructor(props) {
@@ -38,7 +31,6 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log('DB:', DB)
     return (
       <HashRouter>
         <Layout>
