@@ -44,8 +44,8 @@ export default class SiderView extends React.Component {
         };
 
         // 如果md 文件没有设置 category 直接渲染 menuItem；
-        if (md.default && md.default.length) {
-            res.push(renderMenuItem(md.default));
+        if (md.__default__ && md.__default__.length) {
+            res.push(renderMenuItem(md.__default__));
         }
 
         category.forEach((cg, i) => {
@@ -71,15 +71,24 @@ export default class SiderView extends React.Component {
     render() {
         const menuItems = this.$renderItem(this.props.db);
         const{md, config} =this.props.db;
-        const cg = config.category[0];
 
+        // 获取默认首页-然后跳转
+        let indexPage;
+        const history = createHistory()
+        const location = history.location;
+        if (location.pathname === '/' && location.hash === '#/') {
+            if (md.__default__ && md.__default__.length) {
+            indexPage = md.__default__[0].page;
+            } else  {
+                const cg = config.category[0];
+                indexPage = md[cg][0].page;
+            }
+        }
+        
         const defaultKeys = config.category.map(item => {
             return item + '-key';
         })
-
-        const history = createHistory()
-        const location = history.location;
-              
+      
         return (
             <Menu
                 mode="inline"
@@ -88,7 +97,7 @@ export default class SiderView extends React.Component {
                 style={{ height: '100%' }}
             >
                 {menuItems}
-                {(location.pathname === '/' && location.hash === '#/' ) && (<Redirect to={`/page/${md[cg][0].page}`}/>)}
+                {indexPage && (<Redirect to={`/page/${indexPage}`}/>)}
             </Menu>
         )
     }

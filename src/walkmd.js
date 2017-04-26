@@ -69,7 +69,7 @@ module.exports = function walkMD(config, callback) {
             const rank  = yaml.rank;
             let category = yaml.category;
 
-            if (!category) category = 'default';
+            if (!category) category = '__default__';
             
 
             if (!mdData[category]) mdData[category] = [];
