@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Route,
   HashRouter,
+  Redirect,
   Link
 } from 'react-router-dom';
 
@@ -23,13 +24,15 @@ export default class SiderView extends React.Component {
         const res = [];
 
         const category = config.category.slice();
-        
+
         category.forEach((cg, i) => {
             const list = md[cg];
             const items = list.map((item, i) => {
+                const to = `/page/${item.page}`;
+                console.log("to::::", to)
                 return(
                     <Menu.Item key={item.page}>
-                        <Link to={item.page}>
+                        <Link to={to}>
                             {item.page}
                         </Link>
                     </Menu.Item>
@@ -54,6 +57,7 @@ export default class SiderView extends React.Component {
     render() {
         const menuItems = this.$renderItem(this.props.db);
         const{md, config} =this.props.db;
+        const cg = config.category[0];
 
         const defaultKeys = config.category.map(item => {
             return item + '-key';
@@ -67,6 +71,8 @@ export default class SiderView extends React.Component {
                 style={{ height: '100%' }}
             >
                 {menuItems}
+
+                <Redirect to={`/page/${md[cg][0].page}`}/>
             
             </Menu>
         )
