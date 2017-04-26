@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = {
     entry: {
         index: [
+            'babel-polyfill',
             'react-hot-loader/patch',
             'webpack-hot-middleware/client?noInfo=false',
             path.resolve(__dirname, "./src/web/index.js")
@@ -62,7 +63,7 @@ const config = {
         contentBase: path.join(__dirname, 'site'), // boolean | string | array, static file location
         compress: true, // enable gzip compression
         historyApiFallback: true, // true for index.html upon 404, object for multiple paths
-        hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
+        hot: false, // hot module replacement. Depends on HotModuleReplacementPlugin
         https: false, // true for self-signed, object for cert authority
         noInfo: true, // only errors & warns on hot reload
         publicPath: '/'

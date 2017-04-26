@@ -76,7 +76,8 @@ export default class SiderView extends React.Component {
         let indexPage;
         const history = createHistory()
         const location = history.location;
-        if (location.pathname === '/' && location.hash === '#/') {
+        console.log(location);
+        if (location.pathname === '/' && (location.hash === '#/' || location.hash === '#/page' || location.hash === '#/page/')) {
             if (md.__default__ && md.__default__.length) {
             indexPage = md.__default__[0].page;
             } else  {
