@@ -62,6 +62,8 @@ export default class SiderView extends React.Component {
         const defaultKeys = config.category.map(item => {
             return item + '-key';
         })
+        
+        // <Redirect to={`/page/${md[cg][0].page}`}/>
 
         return (
             <Menu
@@ -72,7 +74,6 @@ export default class SiderView extends React.Component {
             >
                 {menuItems}
 
-                <Redirect to={`/page/${md[cg][0].page}`}/>
             
             </Menu>
         )

@@ -2,7 +2,7 @@
 
 const program = require('commander');
 
-const wp = require('../src/wp');
+const wp = require('../src/cherry');
 
 
 program

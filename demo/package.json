@@ -12,6 +12,7 @@
   "author": "zhangpeng",
   "license": "ISC",
   "devDependencies": {
+    "@nfe/mock-middleware": "^1.0.7",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-import": "^1.1.1",
@@ -21,7 +22,8 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
     "react-hot-loader": "^1.3.1",
-    "style-loader": "^0.16.1"
+    "style-loader": "^0.16.1",
+    "superagent": "^3.5.2"
   },
   "dependencies": {
     "react": "^15.5.4",

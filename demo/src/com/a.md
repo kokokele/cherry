@@ -16,9 +16,16 @@ rank: 0
 # a.m
 
 ````js
+import request from 'superagent';
 import {Button, DatePicker} from 'antd';
 import React from 'react';
 import ReactDom from 'react-dom';
+
+request
+    .get('/test1')
+    .end((err, res) => {
+       console.log("superangent：：", err, res);
+    });
 
 export default (props) => {
     return (

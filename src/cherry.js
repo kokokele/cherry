@@ -14,6 +14,8 @@ const path = require('path');
 const node_modules = path.resolve(__dirname, '../node_modules');
 const wpconfigPath = path.resolve(__dirname, '../webpack.config.js');
 
+const server = require('./server');
+
 module.exports = config => {
     walkmd(config, () => {
         // const compiler = webpack(wpconfig);
@@ -21,7 +23,8 @@ module.exports = config => {
         // server.listen(wpconfig.devServer.port, "localhost", ()=> {
         //     console.log('====start-dev-server====');
         // });
-        require('./server');
+        
+        server(config);
 
         // sh(`${node_modules}/.bin/webpack-dev-server --config ${wpconfigPath}`);
     });
