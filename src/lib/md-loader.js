@@ -5,11 +5,8 @@ const yamlFront = require('yaml-front-matter')
 
 const highlightjs = require('highlight.js');
 
-
 let res;
 let id;
-
-const oldCode = renderer.code;
 
 function escape(html, encode) {
   return html
@@ -70,8 +67,7 @@ function process(source) {
     return res;
 }
 
-
-module.exports = function(source, map){
+module.exports = function(source, map) {
     this.cacheable && this.cacheable();
 
     res = '';
@@ -80,10 +76,9 @@ module.exports = function(source, map){
     //对source进行解析
     var md = process(yaml.content);
     res += `\n export const md=${md}; \n export const id="${id}";`
-    console.log('----------------')
-    console.log(res);
-    console.log('--------------')
+    // console.log('----------------')
+    // console.log(res);
+    // console.log('--------------')
 
     this.callback(null, res, map);
-    // return "module.exports = " + '{}';
 }
