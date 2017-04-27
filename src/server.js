@@ -25,15 +25,15 @@ module.exports = (cherryConfig) => {
         reload: false
     }));
 
+    app.use(express.static('../site'));
+
     //add middleware
     if (sc.middleware && sc.middleware.length) {
         sc.middleware.forEach(item => {
-            // app.use(item);
+            app.use(item);
         });
     }
     
-    app.use(express.static('../site'));
-
     app.get('*', function (req, res) {
         // res.sendFile(path.join(__dirname, 'dev/index.html'));
         res.send('404！！！');

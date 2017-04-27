@@ -1,6 +1,6 @@
 {
   "name": "cherry",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "markdown to doc",
   "main": "index.js",
   "scripts": {
@@ -8,10 +8,11 @@
     "dev": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "git@github.com:kokokele/cherry.git",
+  "repository": "https://github.com/kokokele/cherry",
   "keywords": [
+    "cherry",
     "markdown",
-    "reactdoc",
+    "react-doc",
     "md",
     "marked",
     "doc"
@@ -30,6 +31,7 @@
     "highlight": "^0.2.4",
     "highlight.js": "^9.11.0",
     "history": "^4.6.1",
+    "pm2": "^2.4.5",
     "pubsub-js": "^1.5.6",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

@@ -1,3 +1,3 @@
 module.exports = [
-require('/Users/zhangpeng53/Documents/my/markdoc/demo/src/com/c.md'),
+require('/Users/zhangpeng53/Documents/my/markdoc/example/src/com/c.md'),
 ]

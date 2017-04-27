@@ -63,9 +63,6 @@ export default class SiderView extends React.Component {
     }
 
     componentDidMount() {
-        // const{md, config} =this.props.db;
-        // const cg = config.category[0];
-        // if(cg) PubSub.publish('SET_PAGE', md[cg][0].page);
     }
 
     render() {
