@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "cherry st",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -26,8 +27,10 @@
     "superagent": "^3.5.2"
   },
   "dependencies": {
+    "cherry-doc": "^1.0.4",
     "morgan": "^1.8.1",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-hot-loader": "^3.0.0-beta.6"
   }
 }

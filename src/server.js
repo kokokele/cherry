@@ -25,7 +25,7 @@ module.exports = (cherryConfig) => {
         reload: false
     }));
 
-    app.use(express.static('../site'));
+    app.use(express.static(path.resolve(__dirname, '../site') ) );
 
     //add middleware
     if (sc.middleware && sc.middleware.length) {

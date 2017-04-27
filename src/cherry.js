@@ -3,10 +3,7 @@
  * @author zhangpeng53
  */
 const wpconfig = require('../webpack.config');
-
 const webpack = require('webpack');
-const webdevServer = require('webpack-dev-server');
-
 const walkmd = require('./walkmd');
 const sh = require('child_process').execSync;
 const path = require('path');

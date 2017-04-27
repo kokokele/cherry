@@ -1,7 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const NpmInstallPlugin = require('npm-install-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
     entry: {
@@ -29,7 +27,23 @@ const config = {
                 include: [
                     path.resolve(__dirname, "src/web")
                 ],
-                use: ['babel-loader']
+                use: {
+                    loader: ['babel-loader'],
+
+                    presets: [
+                        ["es2015", {"modules": false}],
+                        // webpack understands the native import syntax, and uses it for tree shaking
+                        "stage-0",
+                        "react"
+                        // Transpile React components to JavaScript
+                    ],
+                    plugins: [
+                        "react-hot-loader/babel",
+                        // Enables React code to work with HMR.
+                        ["import", { "libraryName": "antd", "style": "css" }] // `style: true` 会加载 less 文件
+
+                    ]
+                } 
             },
              {
                 test: /\.css$/,
@@ -74,9 +88,7 @@ const config = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
         'process.env.NODE_ENV': '"production"',
-    }),
-    new ExtractTextPlugin({filename: '[name].css', disable: false, allChunks: true}),
-    // new NpmInstallPlugin()
+    })
   ]
 
 }

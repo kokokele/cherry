@@ -1,5 +1,4 @@
 import React from 'react';
-import PubSub from 'pubsub-js';
 
 import { Layout } from 'antd';
 const {Content} = Layout;

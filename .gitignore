@@ -1,4 +1,5 @@
 .history
 node_modules/
 npm-debug.log.*
+example/npm-debug.log
 dist/
