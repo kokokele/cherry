@@ -27,6 +27,7 @@
     "superagent": "^3.5.2"
   },
   "dependencies": {
+    "babel-runtime": "^6.23.0",
     "cherry-doc": "^1.0.4",
     "morgan": "^1.8.1",
     "react": "^15.5.4",

@@ -27,23 +27,25 @@ const config = {
                 include: [
                     path.resolve(__dirname, "src/web")
                 ],
+        
                 use: {
-                    loader: ['babel-loader'],
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            ["es2015", {"modules": false}],
+                            // webpack understands the native import syntax, and uses it for tree shaking
+                            "stage-0",
+                            "react"
+                            // Transpile React components to JavaScript
+                        ],
+                        plugins: [
+                            "react-hot-loader/babel",
+                            // Enables React code to work with HMR.
+                            ["import", { "libraryName": "antd", "style": "css" }] // `style: true` 会加载 less 文件
 
-                    presets: [
-                        ["es2015", {"modules": false}],
-                        // webpack understands the native import syntax, and uses it for tree shaking
-                        "stage-0",
-                        "react"
-                        // Transpile React components to JavaScript
-                    ],
-                    plugins: [
-                        "react-hot-loader/babel",
-                        // Enables React code to work with HMR.
-                        ["import", { "libraryName": "antd", "style": "css" }] // `style: true` 会加载 less 文件
-
-                    ]
-                } 
+                        ]
+                    }
+                }
             },
              {
                 test: /\.css$/,
