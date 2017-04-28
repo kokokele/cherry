@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": "https://github.com/kokokele/cherry",
   "keywords": [
@@ -54,5 +54,7 @@
     "webpack-hot-middleware": "^2.18.0",
     "yaml-front-matter": "^3.4.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^19.0.2"
+  }
 }
