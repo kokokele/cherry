@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const copyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = {
     entry: {
@@ -17,9 +18,7 @@ const config = {
     resolve: {
         extensions: [".js", ".json", ".jsx", ".css"],
     },
-    module: {
 
-    },
     module: {
         rules: [
             {
@@ -56,43 +55,54 @@ const config = {
                 use: ['babel-loader', path.resolve(__dirname, 'src/lib/md-loader.js') ]
             },
             {
-            test: /\.less$/,
+                test: /\.less$/,
                 use: [{
                     loader: "style-loader" // creates style nodes from JS strings
-                }, {
-                    loader: "css-loader" // translates CSS into CommonJS
-                }, {
-                    loader: "less-loader" // compiles Less to CSS
+                    }, {
+                        loader: "css-loader" // translates CSS into CommonJS
+                    }, {
+                        loader: "less-loader" // compiles Less to CSS
                 }]
-        }
+            }
         ],
     },
     
     devtool: "source-map", 
 
-    devServer: {
-        // proxy: { // proxy URLs to backend development server
-        //     '/api': 'http://localhost:3000'
-        // },
-        host: "0.0.0.0",
-        port: 9000,
-        contentBase: path.join(__dirname, 'site'), // boolean | string | array, static file location
-        compress: true, // enable gzip compression
-        historyApiFallback: true, // true for index.html upon 404, object for multiple paths
-        hot: false, // hot module replacement. Depends on HotModuleReplacementPlugin
-        https: false, // true for self-signed, object for cert authority
-        noInfo: true, // only errors & warns on hot reload
-        publicPath: '/'
-    // ...
-  },
-
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"production"',
-    })
-  ]
-
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+        // new webpack.DefinePlugin({
+        //     'process.env.NODE_ENV': '"production"',
+        // })
+    ]
 }
 
-module.exports = config;
+
+
+
+
+module.exports = (isProduction = false) => {
+    if (isProduction) {
+        process.env.NODE_ENV = 'production';
+        delete config.devtool;
+
+        config.plugins = config.plugins.concat([
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false
+                },
+                comments: false
+            }),
+            new copyWebpackPlugin([
+                {from: path.resolve(__dirname, './site'), to: path.resolve(process.cwd(), './site')}
+            ])
+        ]);
+        // console.log(config);
+    } else {
+        config.plugins.push(
+            
+        )
+    }
+
+    return config;
+};

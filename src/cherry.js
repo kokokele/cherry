@@ -2,6 +2,7 @@
  * @file start commander, entry file
  * @author zhangpeng53
  */
+
 const wpconfig = require('../webpack.config');
 const webpack = require('webpack');
 const walkmd = require('./walkmd');
@@ -13,16 +14,27 @@ const wpconfigPath = path.resolve(__dirname, '../webpack.config.js');
 
 const server = require('./server');
 
-module.exports = config => {
+exports.build = config => {
     walkmd(config, () => {
-        // const compiler = webpack(wpconfig);
-        // const server = new webdevServer(compiler, wpconfig.devServer);
+        const site = path.resolve(process.cwd(), 'site');
+        sh(`rm -rf ${site}`);
+        
+        const compiler = webpack(wpconfig(true));
+        compiler.run((err, stats) => {
+            // console.log(stats);
+        });
+    });
+}
+
+exports.dev = config => {
+    walkmd(config, () => {
+       
+         // const server = new webdevServer(compiler, wpconfig.devServer);
         // server.listen(wpconfig.devServer.port, "localhost", ()=> {
         //     console.log('====start-dev-server====');
         // });
 
         const db = require("./tmp/__md__");
-        
         server(config);
 
         // sh(`${node_modules}/.bin/webpack-dev-server --config ${wpconfigPath}`);

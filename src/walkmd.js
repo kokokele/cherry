@@ -7,6 +7,7 @@ const path = require('path');
 const walk = require('walk');
 const yamlFront = require('yaml-front-matter');
 const sh = require('child_process').execSync;
+const chalk = require('chalk');
 
 const dist = __dirname + '/tmp';
 
@@ -83,7 +84,8 @@ module.exports = function walkMD(config, callback) {
     });
 
     walker.on('end', () => {
-        console.log(mdData);
+        console.log(chalk.green('=========解析markdown========='));
+        console.log(chalk.green(JSON.stringify(mdData)));
         writeFiles(mdData);
 
         //将config 写入 文件

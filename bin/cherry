@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-
 const wp = require('../src/cherry');
 
 
@@ -15,17 +14,30 @@ program
 
 
 program
-    .command('start')
-    .description('start site')
-    .alias('st')
+    .command('dev')
+    .description('start dev site')
+    .alias('d')
     .action((p) => {
         // const a = program.peppers;
         const root = p.root || './src';
         const ext = p.ext || '.md';
 
         const config  = require(process.cwd() + '/cherry.config.js');
+        wp.dev(config);
+    })
 
-        wp(config);
+
+program
+    .command('build')
+    .description('build to site')
+    .alias('b')
+    .action((p) => {
+        // const a = program.peppers;
+        const root = p.root || './src';
+        const ext = p.ext || '.md';
+
+        const config  = require(process.cwd() + '/cherry.config.js');
+        wp.build(config);
     })
 
 

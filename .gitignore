@@ -2,5 +2,6 @@
 node_modules/
 npm-debug.log.*
 example/npm-debug.log
+example/site/
 dist/
 src/tmp/
