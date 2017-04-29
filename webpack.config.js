@@ -93,12 +93,7 @@ module.exports = (isProduction = false) => {
                 {from: path.resolve(__dirname, './site'), to: path.resolve(process.cwd(), './site')}
             ])
         ]);
-        // console.log(config);
-    } else {
-        config.plugins.push(
-            
-        )
-    }
+    } 
 
     return config;
 };
