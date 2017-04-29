@@ -6,23 +6,22 @@
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
-const config = require('../webpack.config');
 
-module.exports = (cherryConfig) => {
+module.exports = (cherryConfig, wpConfig) => {
 
     const sc = cherryConfig.server;
 
     const app = express();
 
-    const compiler = webpack(config);
+    const compiler = webpack(wpConfig);
 
     app.use(require('webpack-dev-middleware')(compiler, {
         noInfo: true,
-        publicPath: config.output.publicPath
+        publicPath: wpConfig.output.publicPath
     }));
 
     app.use(require('webpack-hot-middleware')(compiler, {
-        reload: false
+        reload: true
     }));
 
     app.use(express.static(path.resolve(__dirname, '../site') ) );

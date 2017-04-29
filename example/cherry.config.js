@@ -23,5 +23,9 @@ module.exports = {
     server: {
         port: 9001,
         middleware: [mock, logger('combined',{stream:accessLogStream})]
+    },
+
+    setWebpackConfig(config, isProduction) {
+       return config; 
     }
 }

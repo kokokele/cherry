@@ -77,10 +77,6 @@ const config = {
     ]
 }
 
-
-
-
-
 module.exports = (isProduction = false) => {
     if (isProduction) {
         process.env.NODE_ENV = 'production';
