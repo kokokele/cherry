@@ -87,7 +87,7 @@ module.exports = function walkMD(config, callback) {
 
     walker.on('end', () => {
         console.log(chalk.green('=========解析markdown========='));
-        console.log(chalk.green(JSON.stringify(mdData)));
+        console.log(chalk.green(JSON.stringify(mdData, null, 4)));
         console.log(chalk.green('=========end========='));
 
         writeFiles(mdData);
