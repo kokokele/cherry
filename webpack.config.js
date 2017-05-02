@@ -8,7 +8,7 @@ const config = {
             'babel-polyfill',
             'react-hot-loader/patch',
             'webpack-hot-middleware/client?noInfo=false',
-            path.resolve(__dirname, "./src/web/index.js")
+            path.resolve(__dirname, "./src/web.js?a=123")
         ] 
     },
     output: {
@@ -23,8 +23,8 @@ const config = {
         rules: [
             {
                 test: /\.jsx?$/,
-                include: [
-                    path.resolve(__dirname, "src/web")
+                exclude: [
+                    path.resolve(__dirname, "node_modules")
                 ],
         
                 use: {

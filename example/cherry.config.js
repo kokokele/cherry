@@ -20,6 +20,7 @@ module.exports = {
     category: [
         "utils", "Comp"
     ],
+    theme: './theme_default',
     server: {
         port: 9001,
         middleware: [mock, logger('combined',{stream:accessLogStream})]

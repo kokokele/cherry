@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './App.css';
+import styles from './app.css';
 import RM from 'react-dom';
 import Render from './render';
 import {
@@ -18,7 +18,7 @@ import ContentView from './content';
 
 import DB from '../tmp/__md__.json';
 
-class App extends React.Component {
+class Index extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -49,4 +49,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Index;

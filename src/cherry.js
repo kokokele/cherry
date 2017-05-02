@@ -17,11 +17,22 @@ const parseWPConfig = (config, isProduction) => {
     if (config.setWebpackConfig) {
         res = config.setWebpackConfig(res);
     }
-
     return res;
 };
 
+const before = (config) => {
+
+    // 如果是默认主题则使用theme_default
+    if (config.theme == 'default' || !config.theme) {
+        config.theme = path.resolve(__dirname, '../theme_default/');
+    } else {
+        config.theme = path.resolve(process.cwd(), config.theme);
+    }
+};
+
 exports.build = config => {
+    before(config);
+
     walkmd(config, () => {
         const site = path.resolve(process.cwd(), 'site');
         sh(`rm -rf ${site}`);
@@ -34,6 +45,8 @@ exports.build = config => {
 }
 
 exports.dev = config => {
+    before(config);
+
     walkmd(config, () => {
        
          // const server = new webdevServer(compiler, wpconfig.devServer);
@@ -43,6 +56,8 @@ exports.dev = config => {
 
         // TODO
         // const db = require("./tmp/__md__");
+
+        return;
         const server = require('./server');
         const wpConfig = parseWPConfig(config, false);
         server(config, wpConfig);

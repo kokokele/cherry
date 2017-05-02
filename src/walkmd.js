@@ -9,49 +9,51 @@ const yamlFront = require('yaml-front-matter');
 const sh = require('child_process').execSync;
 const chalk = require('chalk');
 
-const dist = __dirname + '/tmp';
-
-function parseData(arr, page, rank, file) {
-    if (!arr.length) {
-        const files = [];
-        files[rank] = file;
-        arr.push({
-            'page': page,
-            'files': files
-        })
-        return;
-    }
-
-    arr.every(item => {
-        if (item.page == page) {
-           item.files[rank] = file;
-           return false;
-        }
-        return true;
-    });
-}
-
-function writeFiles(data) {
-
-    if (fs.existsSync(dist)) sh(`rm -rf ${dist}`);
-    fs.mkdirSync(dist);
-
-    for(var k in data) {
-        const category = data[k];
-        category.forEach(item => {
-            let outFile = '';
-            item.files.forEach(f => {
-                outFile += `require('${f}'),\n`
-            })
-
-            let out = `module.exports = [\n${outFile}]`
-            
-            fs.writeFileSync(dist + `/__${item.page}.js`, out);
-        });
-    }
-}
 
 module.exports = function walkMD(config, callback) {
+    
+    const dist = config.theme + '/tmp';
+
+    function parseData(arr, page, rank, file) {
+        if (!arr.length) {
+            const files = [];
+            files[rank] = file;
+            arr.push({
+                'page': page,
+                'files': files
+            })
+            return;
+        }
+
+        arr.every(item => {
+            if (item.page == page) {
+            item.files[rank] = file;
+            return false;
+            }
+            return true;
+        });
+    }
+
+    function writeFiles(data) {
+
+        if (fs.existsSync(dist)) sh(`rm -rf ${dist}`);
+        fs.mkdirSync(dist);
+
+        for(var k in data) {
+            const category = data[k];
+            category.forEach(item => {
+                let outFile = '';
+                item.files.forEach(f => {
+                    outFile += `require('${f}'),\n`
+                })
+
+                let out = `module.exports = [\n${outFile}]`
+                
+                fs.writeFileSync(dist + `/__${item.page}.js`, out);
+            });
+        }
+    }
+
     const mdData = {};
 
     const walker = walk.walk(config.root);
@@ -86,6 +88,8 @@ module.exports = function walkMD(config, callback) {
     walker.on('end', () => {
         console.log(chalk.green('=========解析markdown========='));
         console.log(chalk.green(JSON.stringify(mdData)));
+        console.log(chalk.green('=========end========='));
+
         writeFiles(mdData);
 
         //将config 写入 文件
