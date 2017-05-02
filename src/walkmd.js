@@ -97,7 +97,7 @@ module.exports = function walkMD(config, callback) {
             md: mdData,
             config: config
         }
-        fs.writeFileSync(dist + '/__md__.json', JSON.stringify(data));
+        fs.writeFileSync(dist + '/__md__.json', JSON.stringify(data, null, 4));
         if (callback) callback(mdData);
     });
 

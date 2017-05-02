@@ -8,9 +8,15 @@ const webpack = require('webpack');
 const walkmd = require('./walkmd');
 const sh = require('child_process').execSync;
 const path = require('path');
+const fs = require('fs');
 
 const node_modules = path.resolve(__dirname, '../node_modules');
 const wpconfigPath = path.resolve(__dirname, '../webpack.config.js');
+
+
+function copyFile(src, dist) {
+  fs.writeFileSync(dist, fs.readFileSync(src));
+}
 
 const parseWPConfig = (config, isProduction) => {
     let res = wpconfig(isProduction);
@@ -22,12 +28,16 @@ const parseWPConfig = (config, isProduction) => {
 
 const before = (config) => {
 
+    let src = path.resolve(process.cwd(), config.theme);
+    let dist = path.resolve(__dirname, '../theme');
+
     // 如果是默认主题则使用theme_default
     if (config.theme == 'default' || !config.theme) {
-        config.theme = path.resolve(__dirname, '../theme_default/');
-    } else {
-        config.theme = path.resolve(process.cwd(), config.theme);
+        src = path.resolve(__dirname, '../theme_default');
     }
+    sh(`rm -rf ${dist}`);
+    sh(`cp -R ${src} ${dist}`);
+    config.theme = dist;
 };
 
 exports.build = config => {
