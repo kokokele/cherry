@@ -24,7 +24,7 @@ module.exports = (cherryConfig, wpConfig) => {
         reload: true
     }));
 
-    app.use(express.static(path.resolve(__dirname, '../site') ) );
+    app.use(express.static(path.resolve(__dirname, '../theme/static') ) );
 
     //add middleware
     if (sc.middleware && sc.middleware.length) {

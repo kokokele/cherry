@@ -13,8 +13,8 @@ export default class ContentView extends React.Component {
     }
 
     render() {
-        // console.log('================')
-        // console.log(this.props);
+        console.log('================')
+        console.log(this.props);
         const {match} = this.props;
         return (
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>

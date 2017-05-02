@@ -23,7 +23,7 @@ module.exports = {
     theme: './theme_default',
     server: {
         port: 9001,
-        middleware: [mock, logger('combined',{stream:accessLogStream})]
+        middleware: [logger('combined',{stream:accessLogStream})]
     },
 
     setWebpackConfig(config, isProduction) {

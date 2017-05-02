@@ -14,19 +14,15 @@ const node_modules = path.resolve(__dirname, '../node_modules');
 const wpconfigPath = path.resolve(__dirname, '../webpack.config.js');
 
 
-function copyFile(src, dist) {
-  fs.writeFileSync(dist, fs.readFileSync(src));
-}
-
-const parseWPConfig = (config, isProduction) => {
+function parseWPConfig(config, isProduction) {
     let res = wpconfig(isProduction);
     if (config.setWebpackConfig) {
         res = config.setWebpackConfig(res);
     }
     return res;
-};
+}
 
-const before = (config) => {
+function before(config) {
 
     let src = path.resolve(process.cwd(), config.theme);
     let dist = path.resolve(__dirname, '../theme');
@@ -67,7 +63,6 @@ exports.dev = config => {
         // TODO
         // const db = require("./tmp/__md__");
 
-        return;
         const server = require('./server');
         const wpConfig = parseWPConfig(config, false);
         server(config, wpConfig);

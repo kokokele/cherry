@@ -8,11 +8,11 @@ const config = {
             'babel-polyfill',
             'react-hot-loader/patch',
             'webpack-hot-middleware/client?noInfo=false',
-            path.resolve(__dirname, "./src/web.js?a=123")
+            path.resolve(__dirname, "./src/entry.index.js")
         ] 
     },
     output: {
-        path: path.resolve(__dirname, "site"),
+        path: path.resolve(__dirname, "theme/static"),
         filename: "[name].js"
     },
     resolve: {
@@ -23,10 +23,10 @@ const config = {
         rules: [
             {
                 test: /\.jsx?$/,
-                exclude: [
-                    path.resolve(__dirname, "node_modules")
+                include: [
+                    path.resolve(__dirname, 'src'),
+                    path.resolve(__dirname, "theme")
                 ],
-        
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -90,7 +90,7 @@ module.exports = (isProduction = false) => {
                 comments: false
             }),
             new copyWebpackPlugin([
-                {from: path.resolve(__dirname, './site'), to: path.resolve(process.cwd(), './site')}
+                {from: path.resolve(__dirname, './theme/static'), to: path.resolve(process.cwd(), './site')}
             ])
         ]);
     } 

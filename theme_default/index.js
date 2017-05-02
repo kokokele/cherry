@@ -16,6 +16,8 @@ import HeaderView from './header';
 import SiderView from './sider';
 import ContentView from './content';
 
+import DB from '../tmp/__md__.json';
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -29,19 +31,16 @@ class Index extends React.Component {
   }
 
   render() {
-    const {db} =  this.props;
     return (
       <HashRouter>
         <Layout>
           <HeaderView />
           <Layout>
               <Sider width={200} style={{ background: '#fff' }}>
-                <SiderView db={db} />
+                <SiderView db={DB}/>
               </Sider>
               <Layout style={{ padding: '0 24px 24px' }}>
-                   <Route exact path="/page/:pageName" render={(props) => (
-                      <ContentView db={db} match={props.match}/>
-                  )}/>
+                  <Route path="/page/:pageName" component={ContentView}/>
               </Layout>
           </Layout>
         </Layout>
