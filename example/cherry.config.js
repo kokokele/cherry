@@ -20,7 +20,7 @@ module.exports = {
     category: [
         "utils", "Comp"
     ],
-    theme: './theme_default',
+    // theme: './theme_default',
     server: {
         port: 9001,
         middleware: [logger('combined',{stream:accessLogStream})]

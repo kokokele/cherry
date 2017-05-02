@@ -1,9 +1,6 @@
 import React from 'react';
 import RM from 'react-dom';
 
-import mdJson from '../tmp/__md__.json';
-
-
 export default class Render extends React.Component {
 
     page;
@@ -40,7 +37,7 @@ export default class Render extends React.Component {
     render() {
         const {pageName} = this.props;
 
-        this.page = require(`../tmp/__${pageName}`);
+        this.page = require(`./tmp/__${pageName}`);
 
         if (!this.page) return <div />;
 
