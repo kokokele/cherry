@@ -6,15 +6,35 @@ import {
   BrowserRouter as Router,
   Route,
   HashRouter,
-  Link
+  Link,
+  Redirect
 } from 'react-router-dom';
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
-const { Sider } = Layout;
+const { Sider, Header } = Layout;
 
 import HeaderView from './header';
 import SiderView from './sider';
 import ContentView from './content';
+
+const NavContent = () => {
+  return <div> NavContent</div>
+}
+
+const SiderContent = (p) => {
+    return (
+      <Layout>
+        <Sider width={200} style={{ background: '#fff' }}>
+          <SiderView db={p.db} />
+        </Sider>
+        <Layout style={{ padding: '0 24px 24px' }}>
+            <Route exact path="/page/:pageName" render={(props) => (
+                <ContentView db={p.db} match={props.match}/>
+            )}/>
+          </Layout>
+      </Layout>
+    )
+}
 
 class Index extends React.Component {
   constructor(props) {
@@ -22,9 +42,7 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-
     // const config = require(this.props.db.root + '/cherry.config');
-
     console.log('============');
     // console.log(config);
   }
@@ -38,17 +56,16 @@ class Index extends React.Component {
     return (
       <HashRouter>
         <Layout>
-          <HeaderView />
-          <Layout>
-              <Sider width={200} style={{ background: '#fff' }}>
-                <SiderView db={db} />
-              </Sider>
-              <Layout style={{ padding: '0 24px 24px' }}>
-                   <Route exact path="/page/:pageName" render={(props) => (
-                      <ContentView db={db} match={props.match}/>
-                  )}/>
-              </Layout>
-          </Layout>
+          <Header>
+            <HeaderView db={db}/>
+          </Header>
+          
+          <Redirect from='/' to='/page'/>
+          <Route path="/page" render={(props) => (
+            <SiderContent db={db} />
+          )}/>
+          
+          <Route path="/nav" component={NavContent}/>
         </Layout>
       </HashRouter>
     )

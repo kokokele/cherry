@@ -21,6 +21,16 @@ module.exports = {
     category: [
         "utils", "Comp"
     ],
+
+    nav: [
+        {
+            label: '糯米', uri: 'http://nuomi.com'
+        },
+        {
+            label: '更新记录', uri: './nav/update.md'
+        }
+    ],
+
     // theme: './theme_default',
     server: {
         port: 9001,

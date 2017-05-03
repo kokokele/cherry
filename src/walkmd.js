@@ -13,6 +13,8 @@ const chalk = require('chalk');
 module.exports = function walkMD(config, callback) {
     
     const dist = config.theme + '/tmp';
+    const mdData = {};
+    const source = {};
 
     function parseData(arr, page, rank, file) {
         if (!arr.length) {
@@ -47,17 +49,13 @@ module.exports = function walkMD(config, callback) {
                     outFile += `require('${f}'),\n`
                 })
 
-                let out = `module.exports = [\n${outFile}]`;
-
                 source[item.page] = `./tmp/__${item.page}`;
-                
+
+                const out = `module.exports = [\n${outFile}]`;
                 fs.writeFileSync(dist + `/__${item.page}.js`, out);
             });
         }
     }
-
-    const mdData = {};
-    const source = {};
 
     const walker = walk.walk(config.root);
     walker.on('file', function (root, fileStats, next) {
@@ -66,7 +64,6 @@ module.exports = function walkMD(config, callback) {
         const basename = path.basename(name, config.ext);
 
         const file = path.resolve('', root + '/' + name);
-        // console.log(file);
         if (ext === config.ext) {
             const input = fs.readFileSync(file, 'utf-8');
             const yaml = yamlFront.loadFront(input, 'content');
@@ -77,14 +74,9 @@ module.exports = function walkMD(config, callback) {
 
             if (!category) category = '__default__';
             
-
             if (!mdData[category]) mdData[category] = [];
             parseData(mdData[category], page, rank, file);
-            // if (!mdData[title]) mdData[title] = {};
-            // if (!mdData[title].files) mdData[title].files = [];
-            // mdData[title].files[rank] = file;
         }
-
         next();
     });
 
