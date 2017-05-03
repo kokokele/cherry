@@ -24,12 +24,14 @@ function parseWPConfig(config, isProduction) {
 
 function before(config) {
 
-    let src = path.resolve(process.cwd(), config.theme);
+    let src;
     let dist = path.resolve(__dirname, '../theme');
 
     // 如果是默认主题则使用theme_default
     if (config.theme == 'default' || !config.theme) {
         src = path.resolve(__dirname, '../theme_default');
+    } else {
+        src = path.resolve(process.cwd(), config.theme);
     }
     sh(`rm -rf ${dist}`);
     sh(`cp -R ${src} ${dist}`);

@@ -15,10 +15,10 @@ export default class ContentView extends React.Component {
     render() {
         // console.log('================')
         // console.log(this.props);
-        const {match} = this.props;
+        const {match, db} = this.props;
         return (
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-                <Render ref='render' pageName={match.params.pageName}/>
+                <Render ref='render' pageName={match.params.pageName} db={db}/>
             </Content>
         )
     }

@@ -15,6 +15,7 @@ var accessLogStream = fs.createWriteStream(__dirname+'/access.log',{flags:'a'});
 
 
 module.exports = {
+    title: 'NRC文档',
     root: './src',
     ext: '.md',
     category: [

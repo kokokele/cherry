@@ -18,6 +18,7 @@ export default class Render extends React.Component {
     }
 
     $renderComp() {
+        if (!this.page) return;
         this.page.forEach(p => {
             const Comp = p.default;
             if (Comp) {
@@ -35,9 +36,8 @@ export default class Render extends React.Component {
     }
 
     render() {
-        const {pageName} = this.props;
-
-        this.page = require(`./tmp/__${pageName}`);
+        const {pageName, db} = this.props;
+        this.page = require(`${db.source[pageName]}`);
 
         if (!this.page) return <div />;
 

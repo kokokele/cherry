@@ -47,7 +47,9 @@ module.exports = function walkMD(config, callback) {
                     outFile += `require('${f}'),\n`
                 })
 
-                let out = `module.exports = [\n${outFile}]`
+                let out = `module.exports = [\n${outFile}]`;
+
+                source[item.page] = `./tmp/__${item.page}`;
                 
                 fs.writeFileSync(dist + `/__${item.page}.js`, out);
             });
@@ -55,6 +57,7 @@ module.exports = function walkMD(config, callback) {
     }
 
     const mdData = {};
+    const source = {};
 
     const walker = walk.walk(config.root);
     walker.on('file', function (root, fileStats, next) {
@@ -95,7 +98,9 @@ module.exports = function walkMD(config, callback) {
         //将config 写入 文件
         const data = {
             md: mdData,
-            config: config
+            config: config,
+            source: source,
+            root: process.cwd()
         }
         fs.writeFileSync(dist + '/__md__.json', JSON.stringify(data, null, 4));
         if (callback) callback(mdData);

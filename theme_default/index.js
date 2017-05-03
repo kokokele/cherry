@@ -22,6 +22,11 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
+
+    // const config = require(this.props.db.root + '/cherry.config');
+
+    console.log('============');
+    // console.log(config);
   }
 
   handleClicked(page) {
