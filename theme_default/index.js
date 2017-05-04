@@ -16,10 +16,7 @@ const { Sider, Header } = Layout;
 import HeaderView from './header';
 import SiderView from './sider';
 import ContentView from './content';
-
-const NavContent = () => {
-  return <div> NavContent</div>
-}
+import NavContent from './navContent';
 
 const SiderContent = (p) => {
     return (
@@ -52,7 +49,7 @@ class Index extends React.Component {
   }
 
   render() {
-    const {db} =  this.props;
+    const {db} = this.props;
     return (
       <HashRouter>
         <Layout>
@@ -64,8 +61,10 @@ class Index extends React.Component {
           <Route path="/page" render={(props) => (
             <SiderContent db={db} />
           )}/>
-          
-          <Route path="/nav" component={NavContent}/>
+
+          <Route path="/nav/:key" render={(props) => (
+            <NavContent db={db} {...props}/>
+          )}/>
         </Layout>
       </HashRouter>
     )

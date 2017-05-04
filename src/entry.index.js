@@ -5,6 +5,7 @@ import { AppContainer } from 'react-hot-loader';
 import App  from '../theme';
 
 import DB from '../theme/tmp/__md__.json';
+import Nav from '../theme/tmp/__nav__';
 
 
 
@@ -14,6 +15,7 @@ import DB from '../theme/tmp/__md__.json';
 //       return <div> {1}</div>;
 //   }
 // }
+DB.nav = Nav;
 
 const render = (Component) => {
   ReactDOM.render(

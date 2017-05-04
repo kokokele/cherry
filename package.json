@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server",
-    "test": "jest"
+    "test": "jest",
+    "pub": "npm version patch && npm publish"
   },
   "repository": "https://github.com/kokokele/cherry",
   "keywords": [

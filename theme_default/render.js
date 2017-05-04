@@ -30,8 +30,8 @@ export default class Render extends React.Component {
     }
 
     $parseMD(page) {
-        const res = page.map(item => {
-            return <div dangerouslySetInnerHTML={{ __html: decodeURIComponent(item.md)}} />
+        const res = page.map((item, i) => {
+            return <div key={i} dangerouslySetInnerHTML={{ __html: decodeURIComponent(item.md)}} />
         });
 
         return res;

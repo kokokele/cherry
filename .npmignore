@@ -2,4 +2,5 @@ npm-debug.log*
 node_modules
 .idea
 example/
-src/tmp/
+www/
+theme/

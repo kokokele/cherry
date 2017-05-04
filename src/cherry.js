@@ -51,7 +51,7 @@ function before(config) {
     if (fs.existsSync(tmp)) sh(`rm -rf ${tmp}`);
     fs.mkdirSync(tmp);
 
-    if (config.nav && config.nav.length) parseNav(config);
+    parseNav(config);
 };
 
 exports.build = config => {
