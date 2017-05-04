@@ -37,16 +37,12 @@ module.exports = function walkMD(config, callback) {
     }
 
     function writeFiles(data) {
-
-        if (fs.existsSync(dist)) sh(`rm -rf ${dist}`);
-        fs.mkdirSync(dist);
-
         for(var k in data) {
             const category = data[k];
             category.forEach(item => {
                 let outFile = '';
                 item.files.forEach(f => {
-                    outFile += `require('${f}'),\n`
+                    outFile += `require('${f}'),\n`;
                 })
 
                 source[item.page] = `./tmp/__${item.page}`;
@@ -74,8 +70,10 @@ module.exports = function walkMD(config, callback) {
 
             if (!category) category = '__default__';
             
-            if (!mdData[category]) mdData[category] = [];
-            parseData(mdData[category], page, rank, file);
+            if (category !== '__nav__') {
+                if (!mdData[category]) mdData[category] = [];
+                parseData(mdData[category], page, rank, file);
+            }
         }
         next();
     });

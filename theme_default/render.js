@@ -37,7 +37,10 @@ export default class Render extends React.Component {
 
     render() {
         const {pageName, db} = this.props;
+        const root  = '/Users/zhangpeng53/Documents/my/markdoc/theme/tmp';
         this.page = require(`${db.source[pageName]}`);
+        // const req = require.context(root, false, /^\.\/.*\.js$/)
+        // this.page = req('./__A.js');
 
         if (!this.page) return <div />;
 

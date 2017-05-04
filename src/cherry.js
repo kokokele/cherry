@@ -9,6 +9,7 @@ const walkmd = require('./walkmd');
 const sh = require('child_process').execSync;
 const path = require('path');
 const fs = require('fs');
+const parseNav = require('./parseNav');
 
 const node_modules = path.resolve(__dirname, '../node_modules');
 const wpconfigPath = path.resolve(__dirname, '../webpack.config.js');
@@ -36,6 +37,13 @@ function before(config) {
     sh(`rm -rf ${dist}`);
     sh(`cp -R ${src} ${dist}`);
     config.theme = dist;
+
+    //创建临时文件夹
+    const tmp  = config.theme + '/tmp';
+    if (fs.existsSync(tmp)) sh(`rm -rf ${tmp}`);
+    fs.mkdirSync(tmp);
+
+    if (config.nav && config.nav.length) parseNav(config);
 };
 
 exports.build = config => {
