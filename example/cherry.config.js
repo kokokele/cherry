@@ -27,7 +27,7 @@ module.exports = {
             label: '糯米', uri: 'http://nuomi.com'
         },
         {
-            label: '更新记录', uri: './nav/update.md'
+            label: '更新记录', uri: './nav/update.md|./nav/update2.md'
         }
     ],
 
