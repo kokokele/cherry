@@ -16,13 +16,15 @@ module.exports = function walkMD(config, callback) {
     const mdData = {};
     const source = {};
 
-    function parseData(arr, page, rank, file) {
+    function parseData(arr, category, page, rank, file) {
+        const key = category + "_" + page;
         if (!arr.length) {
             const files = [];
             files[rank] = file;
             arr.push({
-                'page': page,
-                'files': files
+                page,
+                files,
+                key
             })
             return;
         }
@@ -40,15 +42,16 @@ module.exports = function walkMD(config, callback) {
         for(var k in data) {
             const category = data[k];
             category.forEach(item => {
+                const key = item.key;
                 let outFile = '';
                 item.files.forEach(f => {
                     outFile += `require('${f}'),\n`;
                 })
 
-                source[item.page] = `./tmp/__${item.page}`;
+                source[key] = `./tmp/__${key}`;
 
                 const out = `module.exports = [\n${outFile}]`;
-                fs.writeFileSync(dist + `/__${item.page}.js`, out);
+                fs.writeFileSync(dist + `/__${key}.js`, out);
             });
         }
     }
@@ -72,7 +75,7 @@ module.exports = function walkMD(config, callback) {
             
             if (category !== '__nav__') {
                 if (!mdData[category]) mdData[category] = [];
-                parseData(mdData[category], page, rank, file);
+                parseData(mdData[category], category, page, rank, file);
             }
         }
         next();

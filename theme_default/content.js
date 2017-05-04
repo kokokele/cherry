@@ -13,10 +13,11 @@ export default class ContentView extends React.Component {
     }
 
     render() {
-        // console.log('================')
-        // console.log(this.props);
+        console.log('================')
+        console.log(this.props);
         const {match, db} = this.props;
         const pageName = match.params.pageName;
+
 
         const page = require(`${db.source[pageName]}`);
 
