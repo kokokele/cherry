@@ -28,6 +28,7 @@ function before(config) {
     let src;
     let dist = path.resolve(__dirname, '../theme');
 
+    // 拷贝主题
     // 如果是默认主题则使用theme_default
     if (config.theme == 'default' || !config.theme) {
         src = path.resolve(__dirname, '../theme_default');
@@ -37,6 +38,13 @@ function before(config) {
     sh(`rm -rf ${dist}`);
     sh(`cp -R ${src} ${dist}`);
     config.theme = dist;
+
+
+    //拷贝静态资源
+    const www = path.resolve(__dirname, '../www');
+    console.log(path.join(dist, './static'));
+    sh(`rm -rf ${www}`);
+    sh(`mv ${path.join(dist, './static')} ${www}`);
 
     //创建临时文件夹
     const tmp  = config.theme + '/tmp';
