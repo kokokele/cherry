@@ -9,7 +9,7 @@ const config = {
             'react-hot-loader/patch',
             'webpack-hot-middleware/client?noInfo=false',
             path.resolve(__dirname, "./src/entry.index.js")
-        ] 
+        ]
     },
     output: {
         path: path.resolve(__dirname, "theme/static"),
@@ -23,9 +23,8 @@ const config = {
         rules: [
             {
                 test: /\.jsx?$/,
-                include: [
-                    path.resolve(__dirname, 'src'),
-                    path.resolve(__dirname, "theme")
+                exclude: [
+                    path.resolve(__dirname, 'node_modules'),
                 ],
                 use: {
                     loader: 'babel-loader',
@@ -66,8 +65,8 @@ const config = {
             }
         ],
     },
-    
-    devtool: "source-map", 
+
+    devtool: "source-map",
 
     plugins: [
         new webpack.HotModuleReplacementPlugin()
@@ -93,7 +92,7 @@ module.exports = (isProduction = false) => {
                 {from: path.resolve(__dirname, './theme/static'), to: path.resolve(process.cwd(), './site')}
             ])
         ]);
-    } 
+    }
 
     return config;
 };
