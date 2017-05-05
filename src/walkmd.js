@@ -18,24 +18,27 @@ module.exports = function walkMD(config, callback) {
 
     function parseData(arr, category, page, rank, file) {
         const key = category + "_" + page;
-        if (!arr.length) {
-            const files = [];
-            files[rank] = file;
-            arr.push({
-                page,
-                files,
-                key
-            })
-            return;
-        }
 
-        arr.every(item => {
-            if (item.page == page) {
-            item.files[rank] = file;
-            return false;
+        let have = !!arr.length;
+
+        have = arr.some(item => {
+            if (item.key === key) {
+                item.files[rank] = file;
+                return true;
             }
-            return true;
+
+            return false;
         });
+        
+        if (!have) {
+            arr.push(
+                {
+                    page,
+                    key,
+                    files: [file]
+                }
+            )
+        }
     }
 
     function writeFiles(data) {
