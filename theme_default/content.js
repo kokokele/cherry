@@ -20,7 +20,7 @@ export default class ContentView extends React.Component {
 
         return (
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-                <Render ref='render' page={page}/>
+                <Render page={page}/>
             </Content>
         )
     }

@@ -11,9 +11,9 @@ export default class NavContent extends React.Component {
     }
 
     render() {
-       
+
         const {match, db} = this.props;
-        
+
         const key = match.params.key;
         const nav = db.nav;
 
@@ -30,7 +30,7 @@ export default class NavContent extends React.Component {
 
         return (
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-                <Render ref='render' page={page}/>
+                <Render page={page}/>
             </Content>
         )
     }

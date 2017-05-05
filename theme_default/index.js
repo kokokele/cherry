@@ -44,10 +44,6 @@ class Index extends React.Component {
     // console.log(config);
   }
 
-  handleClicked(page) {
-    this.refs.render.setPage(page);
-  }
-
   render() {
     const {db} = this.props;
     return (
@@ -56,7 +52,7 @@ class Index extends React.Component {
           <Header>
             <HeaderView db={db}/>
           </Header>
-          
+
           <Redirect from='/' to='/page'/>
           <Route path="/page" render={(props) => (
             <SiderContent db={db} />
