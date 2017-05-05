@@ -27,7 +27,7 @@ export default class SiderView extends React.Component {
 
         const category = config.category.slice();
 
-        
+
         const renderMenuItem = (list, cg) => {
             const items = list.map((item, i) => {
                 const to = `/page/${item.key}`;
@@ -73,20 +73,26 @@ export default class SiderView extends React.Component {
         let indexPage;
         const history = createHistory()
         const location = history.location;
-        console.log(location);
         if (location.pathname === '/' && (location.hash === '#/' || location.hash === '#/page' || location.hash === '#/page/')) {
             if (md.__default__ && md.__default__.length) {
             indexPage = md.__default__[0].key;
             } else  {
-                const cg = config.category[0];
-                indexPage = md[cg][0].key;
+                if (config.category && config.category.length) {
+                    const cg = config.category[0];
+                    indexPage = md[cg][0].key;
+                }
+
             }
         }
-        
-        const defaultKeys = config.category.map(item => {
-            return item + '-key';
-        })
-      
+
+        // 默认全部展示二级菜单
+        let defaultKeys = [];
+        if (config.category && config.category.length) {
+                config.category.map(item => {
+                return item + '-key';
+            })
+        }
+
         return (
             <Menu
                 mode="inline"
