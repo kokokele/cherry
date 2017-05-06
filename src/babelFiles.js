@@ -18,7 +18,7 @@ module.exports = (entry, out) => {
 
             if (ext === '.js') {
                 const res = babel.transformFileSync(file);
-                fs.writeFileSync(path.resolve(out, name), res.code);
+                fs.writeFileSync(file, res.code);
             }
             
             next();

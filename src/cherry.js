@@ -62,9 +62,8 @@ function before(config) {
 
 exports.dev = async config => {
     before(config);
-
-    await walkmd(config);
     await babelFiles(config.theme, config.theme);
+    await walkmd(config);
 
     const server = require('./server');
     const wpConfig = parseWPConfig(config, false);
