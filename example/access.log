@@ -679,3 +679,4 @@
 ::ffff:127.0.0.1 - - [06/May/2017:03:19:56 +0000] "GET /favicon.ico HTTP/1.1" 304 - "http://127.0.0.1:9001/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
 ::ffff:127.0.0.1 - - [06/May/2017:03:19:57 +0000] "GET /favicon.ico HTTP/1.1" 304 - "http://127.0.0.1:9001/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
 ::ffff:127.0.0.1 - - [06/May/2017:03:19:58 +0000] "GET /favicon.ico HTTP/1.1" 304 - "http://127.0.0.1:9001/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+::ffff:127.0.0.1 - - [06/May/2017:03:28:32 +0000] "GET /b1bf9588d5856f994541.hot-update.json HTTP/1.1" 200 12 "http://127.0.0.1:9001/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"

@@ -17,7 +17,7 @@ module.exports = (entry, out) => {
             const file = path.resolve('', root + '/' + name);
 
             if (ext === '.js') {
-                const res = babel.transformFileSync('./src/entry.index.js');
+                const res = babel.transformFileSync(file);
                 fs.writeFileSync(path.resolve(out, name), res.code);
             }
             

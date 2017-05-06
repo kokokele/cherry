@@ -2,7 +2,12 @@
  * @file start commander, entry file
  * @author zhangpeng53
  */
+
+"use strict";
+
+require("babel-core/register");
 require('babel-polyfill');
+
 const wpconfig = require('../webpack.config');
 const webpack = require('webpack');
 const walkmd = require('./walkmd');
@@ -24,7 +29,7 @@ function parseWPConfig(config, isProduction) {
     return res;
 }
 
- function before(config) {
+function before(config) {
 
     let src;
     let dist = path.resolve(__dirname, '../theme');
@@ -40,11 +45,8 @@ function parseWPConfig(config, isProduction) {
     sh(`cp -R ${src} ${dist}`);
     config.theme = dist;
 
-     babelFiles(dist, dist);
-
     //拷贝静态资源
     const www = path.resolve(__dirname, '../www');
-    // console.log(path.join(dist, './static'));
     sh(`rm -rf ${www}`);
     sh(`mv ${path.join(dist, './static')} ${www}`);
 
@@ -53,6 +55,7 @@ function parseWPConfig(config, isProduction) {
     if (fs.existsSync(tmp)) sh(`rm -rf ${tmp}`);
     fs.mkdirSync(tmp);
 
+    // 处理导航数据
     parseNav(config);
 };
 
@@ -61,26 +64,11 @@ exports.dev = async config => {
     before(config);
 
     await walkmd(config);
+    await babelFiles(config.theme, config.theme);
 
     const server = require('./server');
     const wpConfig = parseWPConfig(config, false);
     server(config, wpConfig);
-
-    // walkmd(config, () => {
-       
-    //      // const server = new webdevServer(compiler, wpconfig.devServer);
-    //     // server.listen(wpconfig.devServer.port, "localhost", ()=> {
-    //     //     console.log('====start-dev-server====');
-    //     // });
-
-    //     // TODO
-    //     // const db = require("./tmp/__md__");
-
-    //     const server = require('./server');
-    //     const wpConfig = parseWPConfig(config, false);
-    //     server(config, wpConfig);
-    //     // sh(`${node_modules}/.bin/webpack-dev-server --config ${wpconfigPath}`);
-    // });
 }
 
 exports.build = config => {
