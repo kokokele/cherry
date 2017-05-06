@@ -7,6 +7,7 @@
     "start": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server",
     "test": "jest",
+    "build": "rm -rf ./lib && babel ./src --out-dir ./lib --watch",
     "pub": "npm version patch && npm publish"
   },
   "repository": "https://github.com/kokokele/cherry",

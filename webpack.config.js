@@ -8,7 +8,7 @@ const config = {
             'babel-polyfill',
             'react-hot-loader/patch',
             'webpack-hot-middleware/client?noInfo=false',
-            path.resolve(__dirname, "./src/entry.index.js")
+            path.resolve(__dirname, "./lib/entry.index.js")
         ]
     },
     output: {
@@ -24,7 +24,7 @@ const config = {
             {
                 test: /\.jsx?$/,
                 exclude: [
-                    path.resolve(__dirname, 'node_modules'),
+                    path.resolve(process.cwd(), 'node_modules'),
                 ],
                 use: {
                     loader: 'babel-loader',
@@ -51,7 +51,7 @@ const config = {
             },
             {
                 test: /\.md$/,
-                use: ['babel-loader', path.resolve(__dirname, 'src/lib/md-loader.js') ]
+                use: ['babel-loader', path.resolve(__dirname, 'lib/md-loader.js') ]
             },
             {
                 test: /\.less$/,

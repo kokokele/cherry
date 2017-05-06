@@ -4,5 +4,6 @@ npm-debug.log.*
 example/npm-debug.log
 example/site/
 dist/
+lib/
 theme/
 www/
