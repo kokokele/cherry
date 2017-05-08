@@ -92,9 +92,7 @@ export default class SiderView extends React.Component {
                 return item + '-key';
             })
         }
-
-        console.log('defaultKeys：', defaultKeys);
-
+        
         return (
             <Menu
                 mode="inline"
