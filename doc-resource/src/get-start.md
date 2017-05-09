@@ -25,4 +25,38 @@ module.exports = {
 
 
 ### step2
+安装 cherry-doc
 
+```shell
+npm i --save-dev cherry-doc
+```
+
+### step3
+
+在cherry.config.js之前设置root目录里新建 test.md
+
+```md
+---
+page: test
+rank: 0
+---
+
+## 我是测试页面
+```
+
+
+### step4
+在package.json 添加 dev 命令
+```
+"scripts": {
+    "dev": "cherry st",
+  },
+```
+
+### step5
+执行
+```shell
+npm run dev
+```
+
+浏览器输入 `localhost:8000` 即可看到效果
