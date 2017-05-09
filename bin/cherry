@@ -7,13 +7,14 @@ const wp = require('../lib/cherry');
 program
     .version(require('../package').version );
 
+
+
+
 program
     .usage('<command>')
+    .option('-w, --watch', 'watch md update to rebuild')
     .option('-r, --root <dir>', 'site root dir, default ./src')
     .option('-e, --ext <name>', 'md ext, default .md')
-
-
-program
     .command('dev')
     .description('start dev site')
     .alias('d')
@@ -22,8 +23,10 @@ program
         const root = p.root || './src';
         const ext = p.ext || '.md';
 
+        const {watch} = program;
+
         const config  = require(process.cwd() + '/cherry.config.js');
-        wp.dev(config);
+        wp.dev(config, {watch});
     })
 
 

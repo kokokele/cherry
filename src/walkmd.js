@@ -14,6 +14,9 @@ module.exports = function walkMD(config) {
 
     return new Promise((resolve, reject) => {
         const dist = config.theme + '/tmp';
+
+        sh(`rm -rf dist`);
+
         const mdData = {};
         const source = {};
 

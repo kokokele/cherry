@@ -19,7 +19,7 @@ module.exports = {
     root: './src',
     ext: '.md',
     category: [
-        "utils", "Comp"
+        "utils", "Comp", "中文"
     ],
 
     nav: [

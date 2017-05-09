@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "rm -rf ./lib && babel ./src --out-dir ./lib --watch",
     "test": "jest",
+    "example": "cd example && cherry dev",
     "build": "rm -rf ./lib && babel ./src --out-dir ./lib",
     "pub": "npm run build && git ci -am 'for publish' && npm version patch && npm publish"
   },
@@ -43,6 +44,7 @@
     "history": "^4.6.1",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
+    "node-watch": "^0.5.4",
     "pm2": "^2.4.5",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -52,6 +54,7 @@
     "react-router-dom": "^4.1.1",
     "style-loader": "^0.16.1",
     "walk": "^2.3.9",
+    "watch": "^1.0.2",
     "webpack": "^2.4.1",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-hot-middleware": "^2.18.0",

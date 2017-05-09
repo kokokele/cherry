@@ -20,6 +20,8 @@ const babelFiles = require('./babelFiles');
 const node_modules = path.resolve(__dirname, '../node_modules');
 const wpconfigPath = path.resolve(__dirname, '../webpack.config.js');
 
+const watch = require('node-watch');
+
 
 function parseWPConfig(config, isProduction) {
     let res = wpconfig(isProduction);
@@ -60,8 +62,15 @@ function before(config) {
 };
 
 
-exports.dev = async config => {
+exports.dev = async (config, option) => {
     before(config);
+    if (option.watch) {
+        watch(path.resolve(process.cwd(), config.root), {recursive: true}, (evt, name) => {
+            console.log(evt, name);
+            walkmd(config);
+        });
+    }
+
     await babelFiles(config.theme, config.theme);
     await walkmd(config);
 
