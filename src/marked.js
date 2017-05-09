@@ -13,6 +13,7 @@
 var block = {
   newline: /^\n+/,
   code: /^( {4}[^\n]+\n*)+/,
+  runcode: /^ *(\^{3,})[ \.]*(\S+)? *\n([\s\S]*?)\s*\1 *(?:\n+|$)/,
   fences: noop,
   hr: /^( *[-*_]){3,} *(?:\n+|$)/,
   heading: /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/,
@@ -188,6 +189,16 @@ Lexer.prototype.token = function(src, top, bq) {
       src = src.substring(cap[0].length);
       this.tokens.push({
         type: 'code',
+        lang: cap[2],
+        text: cap[3] || ''
+      });
+      continue;
+    }
+
+    if (cap = this.rules.runcode.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'runcode',
         lang: cap[2],
         text: cap[3] || ''
       });
@@ -784,6 +795,10 @@ Renderer.prototype.code = function(code, lang, escaped) {
     + '\n</code></pre>\n';
 };
 
+Renderer.prototype.runcode = function(code, lang, escaped) {
+  return '<pre><code>' + code + '</pre></code>';
+}
+
 Renderer.prototype.blockquote = function(quote) {
   return '<blockquote>\n' + quote + '</blockquote>\n';
 };
@@ -991,6 +1006,13 @@ Parser.prototype.tok = function() {
         this.token.lang,
         this.token.escaped);
     }
+
+    case 'runcode': {
+      return this.renderer.runcode(this.token.text,
+        this.token.lang,
+        this.token.escaped);
+    }
+
     case 'table': {
       var header = ''
         , body = ''

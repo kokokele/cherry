@@ -6,3 +6,5 @@ www/
 theme/
 src/
 .travis.yml
+doc/
+doc-resource/

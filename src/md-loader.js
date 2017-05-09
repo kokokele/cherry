@@ -31,7 +31,7 @@ function unescape(html) {
   });
 }
 
-renderer.code = (code, language, escaped) => {
+renderer.runcode = (code, language, escaped) => {
     res = code;
 
     const validLang = !!(language && highlightjs.getLanguage(language));
@@ -39,6 +39,14 @@ renderer.code = (code, language, escaped) => {
     const highlighted = validLang ? highlightjs.highlight(language, code).value : code;
     // Render the highlighted code with `hljs` class.
     return `<div> <div id=${id}></div><pre><code class="hljs ${language}">${highlighted}</code></pre></div>`;
+}
+
+renderer.code = (code, language, escaped) => {
+    const validLang = !!(language && highlightjs.getLanguage(language));
+    // Highlight only if the language is valid.
+    const highlighted = validLang ? highlightjs.highlight(language, code).value : code;
+    // Render the highlighted code with `hljs` class.
+    return `<div><pre><code class="hljs ${language}">${highlighted}</code></pre></div>`;
 }
 
 renderer.table = function (header, body) {
