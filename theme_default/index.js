@@ -53,8 +53,7 @@ class Index extends React.Component {
             <HeaderView db={db}/>
           </Header>
 
-          <Redirect from='/' to='/page'/>
-          <Route path="/page" render={(props) => (
+          <Route path="/" render={(props) => (
             <SiderContent db={db} />
           )}/>
 

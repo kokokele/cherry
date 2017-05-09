@@ -79,7 +79,7 @@ export default class SiderView extends React.Component {
             } else  {
                 if (config.category && config.category.length) {
                     const cg = config.category[0];
-                    indexPage = md[cg][0].key;
+                   indexPage = md[cg][0].key;
                 }
 
             }
