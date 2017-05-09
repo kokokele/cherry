@@ -9,14 +9,21 @@ const yamlFront = require('yaml-front-matter');
 const sh = require('child_process').execSync;
 const chalk = require('chalk');
 
+function fsExistsSync(path) {
+    try{
+        fs.accessSync(path,fs.F_OK);
+    }catch(e){
+        return false;
+    }
+    return true;
+}
 
 module.exports = function walkMD(config) {
+    
+    const dist = path.join(config.theme, '/tmp');
 
     return new Promise((resolve, reject) => {
-        const dist = config.theme + '/tmp';
-
-        sh(`rm -rf dist`);
-
+        
         const mdData = {};
         const source = {};
 
@@ -63,53 +70,57 @@ module.exports = function walkMD(config) {
             }
         }
 
-        const walker = walk.walk(config.root);
-        walker.on('file', function (root, fileStats, next) {
-            const name = fileStats.name;
-            const ext = path.extname(name);
-            const basename = path.basename(name, config.ext);
+        function walkdir() {
+            const walker = walk.walk(config.root);
+            walker.on('file', function (root, fileStats, next) {
+                const name = fileStats.name;
+                const ext = path.extname(name);
+                const basename = path.basename(name, config.ext);
 
-            const file = path.resolve('', root + '/' + name);
-            if (ext === config.ext) {
-                const input = fs.readFileSync(file, 'utf-8');
-                const yaml = yamlFront.loadFront(input, 'content');
-                // console.log(yaml);
-                const page = yaml.page;
-                const rank  = yaml.rank;
-                let category = yaml.category;
+                const file = path.resolve('', root + '/' + name);
+                if (ext === config.ext) {
+                    const input = fs.readFileSync(file, 'utf-8');
+                    const yaml = yamlFront.loadFront(input, 'content');
+                    // console.log(yaml);
+                    const page = yaml.page;
+                    const rank  = yaml.rank;
+                    let category = yaml.category;
 
-                if (!category) category = '__default__';
-                
-                if (category !== '__nav__') {
-                    if (!mdData[category]) mdData[category] = [];
-                    parseData(mdData[category], category, page, rank, file);
+                    if (!category) category = '__default__';
+                    
+                    if (category !== '__nav__') {
+                        if (!mdData[category]) mdData[category] = [];
+                        parseData(mdData[category], category, page, rank, file);
+                    }
                 }
-            }
-            next();
-        });
+                next();
+            });
 
-        walker.on('end', () => {
-            console.log(chalk.green('=========解析markdown========='));
-            console.log(chalk.green(JSON.stringify(mdData, null, 4)));
-            console.log(chalk.green('=========end========='));
+            walker.on('end', () => {
+                console.log(chalk.green('=========解析markdown========='));
+                console.log(chalk.green(JSON.stringify(mdData, null, 4)));
+                console.log(chalk.green('=========end========='));
 
-            writeFiles(mdData);
+                writeFiles(mdData);
 
-            //将config 写入 文件
-            const data = {
-                md: mdData,
-                config: config,
-                source: source,
-                root: process.cwd()
-            }
-            fs.writeFileSync(dist + '/__md__.json', JSON.stringify(data, null, 4));
+                //将config 写入 文件
+                const data = {
+                    md: mdData,
+                    config: config,
+                    source: source,
+                    root: process.cwd()
+                }
+                fs.writeFileSync(dist + '/__md__.json', JSON.stringify(data, null, 4));
 
-            resolve();
-        });
+                resolve();
+            });
 
-        walker.on('error', (e) => {
-            console.log(e);
-            reject(e);
-        });
+            walker.on('error', (e) => {
+                console.log(e);
+                reject(e);
+            });
+        }
+
+        walkdir();
     });
 }

@@ -10,6 +10,7 @@ describe('test walkmd', () => {
     
     it('should data is right', (done) => {
         walkmd(config, (data) => {
+            console.log(data)
             expect(data.testCategory[0].page).toEqual('testPage');
             done();
         })
