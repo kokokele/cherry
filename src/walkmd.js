@@ -83,10 +83,12 @@ module.exports = function walkMD(config) {
                     const yaml = yamlFront.loadFront(input, 'content');
                     // console.log(yaml);
                     const page = yaml.page;
-                    const rank  = yaml.rank;
+                    let rank  = yaml.rank;
                     let category = yaml.category;
 
                     if (!category) category = '__default__';
+
+                    if (!rank) rank = 0;
                     
                     if (category !== '__nav__') {
                         if (!mdData[category]) mdData[category] = [];
