@@ -10,6 +10,7 @@
     "build": "rm -rf ./lib && babel ./src --out-dir ./lib",
     "pub": "npm run build && git ci -am 'for publish' && npm version patch && npm publish"
   },
+  
   "repository": "https://github.com/kokokele/cherry",
   "keywords": [
     "cherry",
