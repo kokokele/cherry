@@ -1,6 +1,6 @@
 {
   "name": "cherry-doc",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "markdown to doc",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,6 @@
     "build": "rm -rf ./lib && babel ./src --out-dir ./lib",
     "pub": "npm run build && git ci -am 'for publish' && npm version patch && npm publish"
   },
-  
   "repository": "https://github.com/kokokele/cherry",
   "keywords": [
     "cherry",
