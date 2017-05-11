@@ -40,7 +40,7 @@ export default class Render extends React.Component {
     render() {
         const {page} = this.props;
 
-        console.log('page:', page)
+        // console.log('page:', page)
 
         if (!page) return <div />;
 

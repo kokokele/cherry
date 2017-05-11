@@ -29,6 +29,8 @@ export default class SiderView extends React.Component {
 
 
         const renderMenuItem = (list, cg) => {
+
+            if (!list || !list.length) return null;
             const items = list.map((item, i) => {
                 const to = `/page/${item.key}`;
                 return(
@@ -73,7 +75,7 @@ export default class SiderView extends React.Component {
         let indexPage;
         const history = createHistory()
         const location = history.location;
-        if (location.pathname === '/' && (location.hash === '#/' || location.hash === '#/page' || location.hash === '#/page/')) {
+        if ( location.hash === '#/' || location.hash === '#/page' || location.hash === '#/page/')) {
             if (md.__default__ && md.__default__.length) {
             indexPage = md.__default__[0].key;
             } else  {
