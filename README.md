@@ -61,3 +61,7 @@ npm run dev
 ```
 
 浏览器输入 `localhost:8000` 即可看到效果
+
+# 详细文档以及效果预览
+[文档地址](https://kokokele.github.io/cherry/doc/)
+
