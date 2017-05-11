@@ -2,10 +2,12 @@
 module.exports = {
     title: 'cherry-doc 使用说明',
     root: './src',
+    out: '../doc',
     ext: '.md',
     category: [
         "配置说明"
     ],
+    
 
     nav: [
         {

@@ -12,7 +12,7 @@ const config = {
         ]
     },
     output: {
-        path: path.resolve(__dirname, "theme/static"),
+        path: path.resolve(__dirname, "www"),
         filename: "[name].js"
     },
     resolve: {
@@ -87,10 +87,7 @@ module.exports = (isProduction = false) => {
                     warnings: false
                 },
                 comments: false
-            }),
-            new copyWebpackPlugin([
-                {from: path.resolve(__dirname, './theme/static'), to: path.resolve(process.cwd(), './site')}
-            ])
+            })
         ]);
     }
 

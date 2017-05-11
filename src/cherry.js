@@ -86,16 +86,23 @@ exports.dev = async (config, option) => {
     server(config, wpConfig);
 }
 
-exports.build = config => {
+exports.build = async config => {
     before(config);
 
-    walkmd(config, () => {
-        const site = path.resolve(process.cwd(), 'site');
-        sh(`rm -rf ${site}`);
-        
-        const compiler = webpack(parseWPConfig(config, true));
-            compiler.run((err, stats) => {
-            // console.log(stats);
-        });
+    await babelFiles(config.theme, config.theme);
+    await walkmd(config);
+
+    const src = path.resolve(__dirname, '../www');
+    const out = path.resolve(process.cwd(), config.out || './site' );
+
+    
+    sh(`rm -rf ${out}`);
+    
+    const compiler = webpack(parseWPConfig(config, true));
+        compiler.run((err, stats) => {
+        // console.log(stats);
+        if (!err) {
+            sh(`cp -R ${src} ${out}`);
+        }
     });
 }
