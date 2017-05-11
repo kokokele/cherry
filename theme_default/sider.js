@@ -86,7 +86,6 @@ export default class SiderView extends React.Component {
 
             }
         }
-
         // 默认全部展示二级菜单
         let defaultKeys = [];
         if (config.category && config.category.length) {
