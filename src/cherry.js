@@ -43,7 +43,7 @@ function before(config) {
     let src;
     let dist = path.resolve(__dirname, '../theme');
 
-    // 拷贝主题
+    // 拷贝主题-
     // 如果是默认主题则使用theme_default
     if (!config.theme || config.theme == 'default') {
         src = path.resolve(__dirname, '../theme_default');
