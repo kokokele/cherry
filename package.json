@@ -1,6 +1,6 @@
 {
   "name": "cherry-doc",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "markdown to doc",
   "main": "index.js",
   "scripts": {
