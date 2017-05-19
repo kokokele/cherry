@@ -52,8 +52,8 @@ class Index extends React.Component {
           <Header>
             <HeaderView db={db}/>
           </Header>
-
-          <Route path="/" render={(props) => (
+          
+          <Route path="/page" render={(props) => (
             <SiderContent db={db} />
           )}/>
 
