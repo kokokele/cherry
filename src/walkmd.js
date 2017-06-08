@@ -18,12 +18,20 @@ function fsExistsSync(path) {
     return true;
 }
 
+//创建临时文件夹
+function createTmp(tmp) {
+    if (fs.existsSync(tmp)) sh(`rm -rf ${tmp}`);
+    fs.mkdirSync(tmp);
+}
+
 module.exports = function walkMD(config) {
-    
+
     const dist = path.join(config.theme, '/tmp');
 
+    createTmp(dist);
+
     return new Promise((resolve, reject) => {
-        
+
         const mdData = {};
         const source = {};
 
@@ -40,7 +48,7 @@ module.exports = function walkMD(config) {
 
                 return false;
             });
-            
+
             if (!have) {
                 arr.push(
                     {
@@ -89,7 +97,7 @@ module.exports = function walkMD(config) {
                     if (!category) category = '__default__';
 
                     if (!rank) rank = 0;
-                    
+
                     if (category !== '__nav__') {
                         if (!mdData[category]) mdData[category] = [];
                         parseData(mdData[category], category, page, rank, file);

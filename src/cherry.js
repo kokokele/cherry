@@ -31,13 +31,6 @@ function parseWPConfig(config, isProduction) {
     return res;
 }
 
-//创建临时文件夹
-function createTmp(config) {
-    const tmp  = config.theme + '/tmp';
-    if (fs.existsSync(tmp)) sh(`rm -rf ${tmp}`);
-    fs.mkdirSync(tmp);
-}
-
 function before(config) {
 
     let src;
@@ -59,13 +52,9 @@ function before(config) {
     sh(`rm -rf ${www}`);
     sh(`mv ${path.join(dist, './static')} ${www}`);
 
-    createTmp(config);
-
     // 处理导航数据
     parseNav(config);
 };
-
-
 
 
 exports.dev = async (config, option) => {
@@ -73,7 +62,6 @@ exports.dev = async (config, option) => {
     if (option.watch) {
         watch(path.resolve(process.cwd(), config.root), {recursive: true}, (evt, name) => {
             console.log(evt, name);
-            createTmp(config);
             parseNav(config);
             walkmd(config);
         });
@@ -95,9 +83,9 @@ exports.build = async config => {
     const src = path.resolve(__dirname, '../www');
     const out = path.resolve(process.cwd(), config.out || './site' );
 
-    
+
     sh(`rm -rf ${out}`);
-    
+
     const compiler = webpack(parseWPConfig(config, true));
         compiler.run((err, stats) => {
         // console.log(stats);
