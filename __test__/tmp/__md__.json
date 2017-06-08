@@ -1,0 +1,22 @@
+{
+    "md": {
+        "testCategory": [
+            {
+                "page": "testPage",
+                "key": "testCategory_testPage",
+                "files": [
+                    "/Users/zhangpeng53/Documents/my/markdoc/__test__/md/a.md"
+                ]
+            }
+        ]
+    },
+    "config": {
+        "root": "/Users/zhangpeng53/Documents/my/markdoc/__test__/md",
+        "ext": ".md",
+        "theme": "/Users/zhangpeng53/Documents/my/markdoc/__test__"
+    },
+    "source": {
+        "testCategory_testPage": "./tmp/__testCategory_testPage"
+    },
+    "root": "/Users/zhangpeng53/Documents/my/markdoc"
+}
