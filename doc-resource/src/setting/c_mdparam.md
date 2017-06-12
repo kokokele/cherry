@@ -34,4 +34,4 @@ export default () => {
 
 ^^^
 ```
-> 此表情代表里面的代码可以运行。如果需要展示react组件效果需要 添加 `export default` 导出该组件做展示。
+> 此标签代表里面的代码可以运行。如果需要展示react组件效果需要 添加 `export default` 导出该组件做展示。
