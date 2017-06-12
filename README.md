@@ -3,6 +3,24 @@
 # cherry
 ![image](https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSVWc4Y4dXqcqubFKdBCMgA9fWwpTfpeqxmG9EiFv-N_vLk-_jq)
 
+# 概述
+
+### cherry-doc 是什么？
+
+cherry是一个基于React的动态文档系统。区别于hexo等md文档工具，它是开发者边开发边生成文档网站，不会再有后期补充文档的烦恼。基于markdown语法书写js代码，可以通过code标签运行code里的js代码预览效果。
+做到边开发边生成文档。
+
+
+### 特性
+- 上手快，简单配置即可
+- 基于md预览js代码效果
+- 一键生成文档站点
+- 无需数据库支持
+- 支持自定义主题
+- 支持两级目录
+- 支持es6语法
+- 支持hot-reload
+
 
 # 快速开始
 
@@ -64,4 +82,3 @@ npm run dev
 
 # 详细文档以及效果预览
 [文档地址](https://kokokele.github.io/cherry/doc/)
-
