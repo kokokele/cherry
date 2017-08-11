@@ -40,7 +40,6 @@ class Index extends React.Component {
 
   componentDidMount() {
     // const config = require(this.props.db.root + '/cherry.config');
-    console.log('============');
     // console.log(config);
   }
 
@@ -52,7 +51,7 @@ class Index extends React.Component {
           <Header>
             <HeaderView db={db}/>
           </Header>
-          
+
           <Route path="/page" render={(props) => (
             <SiderContent db={db} />
           )}/>
@@ -60,6 +59,8 @@ class Index extends React.Component {
           <Route path="/nav/:key" render={(props) => (
             <NavContent db={db} {...props}/>
           )}/>
+
+          <Redirect to="/page"/>
         </Layout>
       </HashRouter>
     )
