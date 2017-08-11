@@ -68,7 +68,7 @@ rank: 0
 在package.json 添加 dev 命令
 ```
 "scripts": {
-    "dev": "cherry st",
+    "dev": "cherry dev",
   },
 ```
 
