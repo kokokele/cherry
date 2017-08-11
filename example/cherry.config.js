@@ -18,6 +18,7 @@ module.exports = {
     title: 'NRC文档',
     root: './src',
     ext: '.md',
+    hotreload: true,
     category: [
         "utils", "Comp", "中文"
     ],
@@ -38,6 +39,6 @@ module.exports = {
     },
 
     setWebpackConfig(config, isProduction) {
-       return config; 
+       return config;
     }
 }

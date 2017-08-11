@@ -8,8 +8,6 @@ program
     .version(require('../package').version );
 
 
-
-
 program
     .usage('<command>')
     .option('-w, --watch', 'watch md update to rebuild')

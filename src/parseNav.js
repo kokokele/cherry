@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 const fs = require('fs');
 const sh = require('child_process').execSync;
@@ -8,6 +8,7 @@ const path = require('path');
 
 module.exports = (config) => {
 
+
     const dist = config.theme + '/tmp';
     const nav = config.nav;
 
@@ -15,7 +16,7 @@ module.exports = (config) => {
         fs.writeFileSync(dist + `/__nav__.js`, 'module.exports=[];');
         return;
     }
-    
+
     let out = '';
 
     nav.forEach(item => {
@@ -43,5 +44,4 @@ module.exports = (config) => {
 
     out = `module.exports = [${out}];`;
     fs.writeFileSync(dist + `/__nav__.js`, out);
-
 }

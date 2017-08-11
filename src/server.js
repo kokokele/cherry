@@ -32,13 +32,13 @@ module.exports = (cherryConfig, wpConfig) => {
             app.use(item);
         });
     }
-    
+
     app.get('*', function (req, res) {
         // res.sendFile(path.join(__dirname, 'dev/index.html'));
         res.send('404！！！');
     });
 
-    
+
     const port = sc.port || 9000;
     app.listen(port, function (err) {
         if (err) {

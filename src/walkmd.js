@@ -20,8 +20,9 @@ function fsExistsSync(path) {
 
 //创建临时文件夹
 function createTmp(tmp) {
-    if (fs.existsSync(tmp)) sh(`rm -rf ${tmp}`);
-    fs.mkdirSync(tmp);
+    // if (fs.existsSync(tmp)) sh(`rm -rf ${tmp}`);
+    // fs.mkdirSync(tmp);
+    if (!fs.existsSync(tmp)) fs.mkdirSync(tmp);
 }
 
 module.exports = function walkMD(config) {

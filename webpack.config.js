@@ -5,9 +5,6 @@ const copyWebpackPlugin = require('copy-webpack-plugin');
 const config = {
     entry: {
         index: [
-            'babel-polyfill',
-            'react-hot-loader/patch',
-            'webpack-hot-middleware/client?noInfo=false',
             path.resolve(__dirname, "./lib/entry.index.js")
         ]
     },
@@ -22,29 +19,32 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
-                exclude: [
-                    path.resolve(process.cwd(), 'node_modules'),
-                ],
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            ["es2015", {"modules": false}],
-                            // webpack understands the native import syntax, and uses it for tree shaking
-                            "stage-0",
-                            "react"
-                            // Transpile React components to JavaScript
-                        ],
-                        plugins: [
-                            "react-hot-loader/babel",
-                            // Enables React code to work with HMR.
-                            ["import", { "libraryName": "antd", "style": "css" }] // `style: true` 会加载 less 文件
-
-                        ]
-                    }
-                }
-            },
+				test: /\.jsx?$/,
+				loader: 'babel-loader',
+				options: {
+					presets: [['es2015',  {"modules": false}], 'stage-0', 'react'],
+					plugins: [],
+					ignore: /node_modules/,
+					babelrc: false
+				},
+                // exclude: [
+                //     path.resolve(process.cwd(), 'node_modules'),
+                // ]
+			},
+            // {
+            //     test: /\.jsx?$/,
+            //     query: {
+            //        plugins: [
+            //          'react-hot-loader/babel'
+            //        ]
+            //    },
+            //     exclude: [
+            //         path.resolve(process.cwd(), 'node_modules'),
+            //     ],
+            //     use: {
+            //         loader: 'babel-loader'
+            //     }
+            // },
              {
                 test: /\.css$/,
                 use: [ 'style-loader', 'css-loader' ]
@@ -69,14 +69,13 @@ const config = {
     devtool: "source-map",
 
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
         // new webpack.DefinePlugin({
         //     'process.env.NODE_ENV': '"production"',
         // })
     ]
 }
 
-module.exports = (isProduction = false) => {
+module.exports = (cherryConfig, isProduction = false) => {
     if (isProduction) {
         process.env.NODE_ENV = 'production';
         delete config.devtool;
@@ -89,6 +88,26 @@ module.exports = (isProduction = false) => {
                 comments: false
             })
         ]);
+    } else {
+
+        // 开发模式 是否支持hotreload
+        if (cherryConfig.hotreload) {
+            config.entry.index = [
+                'babel-polyfill',
+                'react-hot-loader/patch',
+                'webpack-hot-middleware/client?noInfo=false',
+                path.resolve(__dirname, "./lib/entry.index.js")
+            ];
+
+            config.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+            config.module.rules[0].options = {
+                presets: [['es2015',  {"modules": false}], 'stage-0', 'react'],
+                plugins: ['react-hot-loader/babel'],
+                ignore: /node_modules/,
+                babelrc: false
+            }
+        }
     }
 
     return config;
